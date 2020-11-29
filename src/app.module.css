@@ -1,0 +1,5 @@
+.tabbar {
+	--color: var(--ion-text-color);
+	--color-selected: var(--ion-color-main);
+	--ripple-color: var(--ion-color-main);
+}

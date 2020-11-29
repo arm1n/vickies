@@ -1,0 +1,9 @@
+:root {
+	--font-family-default: 'Neue Plak', 'Helvetica Neue', sans-serif;
+	--font-family-special: 'Nocturne Serif', serif;
+
+	--border-radius: 0.25rem;
+
+	--font-size-clamp-scale: 0.85;
+	--font-size-clamp-threshold: 768;
+}

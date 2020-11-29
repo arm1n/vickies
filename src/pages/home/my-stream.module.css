@@ -1,0 +1,24 @@
+.ionsegmentbutton {
+	--ion-text-color-rgb: var(--ion-color-medium-rgb); /* disabled color */
+	--badge: calc(-1 * var(--padding-end));
+	text-transform: lowercase;
+}
+
+.wrapper {}
+
+.badge {
+	top: 0rem;
+	font-size: 0.675rem;
+	right: var(--badge);
+	position: absolute;
+	min-width: 1rem;
+	min-height: 1rem;
+	border-radius: 100%;
+}
+
+.badge:before {
+  content: "";
+  vertical-align: top;
+  padding-bottom: 100%;
+  display: inline-block;
+}

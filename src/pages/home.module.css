@@ -1,0 +1,10 @@
+.ionitem {
+	--inner-padding-end: 0;
+	--padding-end: 0;
+}
+
+.myideas {
+	max-width: 720px;
+	display: flex;
+	justify-content: center;
+}

@@ -1,0 +1,21 @@
+.wrapper {}
+
+.xs {
+	margin-bottom: 0.25rem;
+}
+
+.sm {
+	margin-bottom: 0.5rem;
+}
+
+.md {
+	margin-bottom: 1rem;
+}
+
+.lg {
+	margin-bottom: 2rem;
+}
+
+.xl {
+	margin-bottom: 3rem;
+}

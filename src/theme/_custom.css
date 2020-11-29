@@ -1,0 +1,9 @@
+/** https://ionicons.com/usage */
+ion-icon {
+	--ionicon-stroke-width: 0.2rem;
+	font-size: 1.5rem;
+}
+
+ion-avatar {
+	--border-radius: 0.25rem;
+}

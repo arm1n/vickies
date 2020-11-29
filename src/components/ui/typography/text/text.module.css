@@ -1,0 +1,92 @@
+.wrapper {
+	--max: var(--font-size);
+	--min: calc(var(--font-size) * var(--font-size-clamp-scale));
+	--clamp: calc(
+		var(--font-size) * var(--font-size-clamp-scale) /
+			var(--font-size-clamp-threshold) * 100
+	);
+
+	color: var(--text-color);
+	font-family: var(--font-family);
+	font-size: clamp(var(--min), var(--clamp), var(--max));
+}
+
+.default {
+	--font-family: var(--font-family-default);
+}
+
+.special {
+	--font-family: var(--font-family-special);
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.xs {
+	--font-size: 0.875rem;
+}
+
+.sm {
+	--font-size: 1rem;
+}
+
+.md {
+	--font-size: 1.25rem;
+}
+
+.lg {
+	--font-size: 1.5rem;
+}
+
+.xl {
+	--font-size: 2rem;
+}
+
+.inherit {
+	--text-color: inherit;
+}
+
+.dark {
+	--text-color: var(--ion-color-dark);
+}
+.medium {
+	--text-color: var(--ion-color-medium);
+}
+.light {
+	--text-color: var(--ion-color-light);
+}
+.primary {
+	--text-color: var(--ion-color-primary);
+}
+.secondary {
+	--text-color: var(--ion-color-secondary);
+}
+.tertiary {
+	--text-color: var(--ion-color-tertiary);
+}
+.success {
+	--text-color: var(--ion-color-success);
+}
+.warning {
+	--text-color: var(--ion-color-warning);
+}
+.danger {
+	--text-color: var(--ion-color-danger);
+}
+.main {
+	--text-color: var(--ion-color-main);
+}
+
+.more {
+	border: none;
+	outline: none;
+	background: none;
+	font-weight: bold;
+	font-size: inherit;
+	padding: 0 0 0 0.25rem;
+	color: var(--ion-color-medium);
+}
+.more:hover {
+	color: var(--ion-color-dark);
+}
