@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 56.1 48.1" class="ionicon usePageByAliasionicon-fill-none ionicon-stroke-width ionicon-fill-none">
+  <defs>
+    <path id="a" d="M0 0h56.1v48.1H0z"/>
+  </defs>
+  <clipPath id="b">
+    <use xlink:href="#a" overflow="visible"/>
+  </clipPath>
+  <path d="M54.8 33.9v8.7c0 2.3-1.9 4.2-4.2 4.2H5.5c-2.3 0-4.2-1.9-4.2-4.2v-8.7m11.9-17.8L28 1.2l14.9 14.9M28 1.3v34.5" clip-path="url(#b)" fill="none"/>
+</svg>
