@@ -3,8 +3,8 @@
     "static/js/0.a1ee771d.chunk.js": "/vickies/static/js/0.a1ee771d.chunk.js",
     "static/js/0.a1ee771d.chunk.js.map": "/vickies/static/js/0.a1ee771d.chunk.js.map",
     "main.css": "/vickies/static/css/main.39ff4f57.chunk.css",
-    "main.js": "/vickies/static/js/main.e4a34a01.chunk.js",
-    "main.js.map": "/vickies/static/js/main.e4a34a01.chunk.js.map",
+    "main.js": "/vickies/static/js/main.072f49b3.chunk.js",
+    "main.js.map": "/vickies/static/js/main.072f49b3.chunk.js.map",
     "polyfills-dom.js": "/vickies/static/js/polyfills-dom.15f7dbf3.chunk.js",
     "polyfills-dom.js.map": "/vickies/static/js/polyfills-dom.15f7dbf3.chunk.js.map",
     "runtime-main.js": "/vickies/static/js/runtime-main.0ecd5326.js",
@@ -121,7 +121,7 @@
     "static/js/58.bbcd2cc9.chunk.js": "/vickies/static/js/58.bbcd2cc9.chunk.js",
     "static/js/58.bbcd2cc9.chunk.js.map": "/vickies/static/js/58.bbcd2cc9.chunk.js.map",
     "index.html": "/vickies/index.html",
-    "precache-manifest.5eabb39fb6d37b88b2035a4785d9aa4e.js": "/vickies/precache-manifest.5eabb39fb6d37b88b2035a4785d9aa4e.js",
+    "precache-manifest.2a09975a897e40761e44f6ff35b14f86.js": "/vickies/precache-manifest.2a09975a897e40761e44f6ff35b14f86.js",
     "service-worker.js": "/vickies/service-worker.js",
     "static/css/4.3614eac3.chunk.css.map": "/vickies/static/css/4.3614eac3.chunk.css.map",
     "static/css/main.39ff4f57.chunk.css.map": "/vickies/static/css/main.39ff4f57.chunk.css.map",
@@ -152,6 +152,6 @@
     "static/css/4.3614eac3.chunk.css",
     "static/js/4.be44d613.chunk.js",
     "static/css/main.39ff4f57.chunk.css",
-    "static/js/main.e4a34a01.chunk.js"
+    "static/js/main.072f49b3.chunk.js"
   ]
 }
