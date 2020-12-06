@@ -37,7 +37,7 @@ import "@ionic/react/css/display.css";
 
 import "./theme/main.css";
 
-import styles from "./app.module.css";
+import styles from "./App.module.css";
 
 const App: React.FC = () => (
   <IonApp>
