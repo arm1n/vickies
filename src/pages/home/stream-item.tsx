@@ -52,6 +52,7 @@ export const StreamItem: FC<StreamItemProps> = ({
 	const [popoverEvent, setPopoverEvent] = useState<MouseEvent | undefined>(
 		undefined
 	);
+	const [pagerElement, setPagerElement] = useState<HTMLElement | null>(null);
 
 	const showPopoverHandler = useCallback((event) => {
 		event.persist();
@@ -68,12 +69,12 @@ export const StreamItem: FC<StreamItemProps> = ({
 			observeParents: true,
 			pagination: {
 				type: "bullets",
-				el: `.${styles.pager}`,
+				el: pagerElement,
 				bulletClass: styles.pageritem,
 				bulletActiveClass: styles.pageritemactive,
 			},
 		}),
-		[]
+		[pagerElement]
 	);
 
 	return (
@@ -117,7 +118,9 @@ export const StreamItem: FC<StreamItemProps> = ({
 									<IonLabel>Aktionen</IonLabel>
 								</IonListHeader>
 								<IonItem button={true}>Melden</IonItem>
-								<IonItem button={true} lines="none">Ausblenden</IonItem>
+								<IonItem button={true} lines="none">
+									Ausblenden
+								</IonItem>
 							</IonList>
 						</IonPopover>
 						<IonButton
@@ -156,7 +159,7 @@ export const StreamItem: FC<StreamItemProps> = ({
 
 				{images.length > 0 && (
 					<div className={styles.images}>
-						<div className={styles.pager} />
+						<div ref={setPagerElement} className={styles.pager} />
 						<IonSlides
 							pager={true}
 							options={sliderOptions}
@@ -167,7 +170,6 @@ export const StreamItem: FC<StreamItemProps> = ({
 									<img
 										className={styles.image}
 										src={image}
-										width="400"
 										alt=""
 									/>
 								</IonSlide>
