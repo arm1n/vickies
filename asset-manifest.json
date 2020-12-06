@@ -2,7 +2,7 @@
   "files": {
     "static/js/0.536247eb.chunk.js": "/vickies/static/js/0.536247eb.chunk.js",
     "static/js/0.536247eb.chunk.js.map": "/vickies/static/js/0.536247eb.chunk.js.map",
-    "main.css": "/vickies/static/css/main.e8d39367.chunk.css",
+    "main.css": "/vickies/static/css/main.2c73a514.chunk.css",
     "main.js": "/vickies/static/js/main.2b03d57d.chunk.js",
     "main.js.map": "/vickies/static/js/main.2b03d57d.chunk.js.map",
     "polyfills-dom.js": "/vickies/static/js/polyfills-dom.aa584004.chunk.js",
@@ -121,10 +121,10 @@
     "static/js/58.7a70f16a.chunk.js": "/vickies/static/js/58.7a70f16a.chunk.js",
     "static/js/58.7a70f16a.chunk.js.map": "/vickies/static/js/58.7a70f16a.chunk.js.map",
     "index.html": "/vickies/index.html",
-    "precache-manifest.70617ab94207fe79aef8e98d2f6982ad.js": "/vickies/precache-manifest.70617ab94207fe79aef8e98d2f6982ad.js",
+    "precache-manifest.f28bd61835bfef9add8e9b7790a43211.js": "/vickies/precache-manifest.f28bd61835bfef9add8e9b7790a43211.js",
     "service-worker.js": "/vickies/service-worker.js",
     "static/css/4.3614eac3.chunk.css.map": "/vickies/static/css/4.3614eac3.chunk.css.map",
-    "static/css/main.e8d39367.chunk.css.map": "/vickies/static/css/main.e8d39367.chunk.css.map",
+    "static/css/main.2c73a514.chunk.css.map": "/vickies/static/css/main.2c73a514.chunk.css.map",
     "static/js/4.506bbb03.chunk.js.LICENSE.txt": "/vickies/static/js/4.506bbb03.chunk.js.LICENSE.txt",
     "static/js/52.a3a9440c.chunk.js.LICENSE.txt": "/vickies/static/js/52.a3a9440c.chunk.js.LICENSE.txt",
     "static/js/58.7a70f16a.chunk.js.LICENSE.txt": "/vickies/static/js/58.7a70f16a.chunk.js.LICENSE.txt",
@@ -154,7 +154,7 @@
     "static/js/runtime-main.c9b1583c.js",
     "static/css/4.3614eac3.chunk.css",
     "static/js/4.506bbb03.chunk.js",
-    "static/css/main.e8d39367.chunk.css",
+    "static/css/main.2c73a514.chunk.css",
     "static/js/main.2b03d57d.chunk.js"
   ]
 }
