@@ -13,8 +13,8 @@ import {
 } from "@ionic/react";
 
 import { Container, Section, Title } from "components";
+import myProfileImg from "images/profiles/profile-hansjoerg-rogen.jpg";
 import messageIcon from "icons/message.svg";
-import avatarImg from "images/profile1.jpg";
 
 
 import { MyIdeas } from "./home/my-ideas";
@@ -31,7 +31,7 @@ export const Home: React.FC = () => (
         <IonToolbar>
           <IonItem slot="start" lines="none" className={styles.ionitem}>
             <IonAvatar>
-              <img src={avatarImg} alt="" />
+              <img src={myProfileImg} alt="" />
             </IonAvatar>
           </IonItem>
           <IonButtons slot="end">
