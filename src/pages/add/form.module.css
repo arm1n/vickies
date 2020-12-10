@@ -1,0 +1,54 @@
+.wrapper {
+}
+
+.container {
+	display: flex;
+}
+
+.profile {
+	flex: 0 1 auto;
+	margin-right: 1rem;
+}
+
+.avatar {
+	width: 2.75rem;
+	height: 2.75rem;
+}
+
+.content {
+	flex: 1 1 auto;
+}
+
+.title {
+	font-weight: bold;
+	margin: 0.25rem 0 1rem;
+}
+
+.text {
+	margin: 0 0 1rem;
+}
+
+.expandable {
+	padding: var(--form-padding);
+}
+
+.mediabutton {
+	overflow: hidden;
+	position: relative;
+}
+.file {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0;
+	position: absolute;
+}
+
+.image {
+	border: none;
+	outline: none;
+	display: block;
+	background: none;
+	padding: var(--form-padding);
+}

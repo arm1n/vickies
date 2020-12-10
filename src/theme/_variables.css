@@ -6,4 +6,6 @@
 
 	--font-size-clamp-scale: 0.85;
 	--font-size-clamp-threshold: 768;
+
+	--form-padding: 10px 0 11px 8px;
 }

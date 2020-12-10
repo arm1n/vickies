@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { FC, Fragment } from "react";
 import {
   IonContent,
   IonHeader,
@@ -16,16 +16,13 @@ import { Container, Section, Title } from "components";
 import myProfileImg from "images/profiles/profile-hansjoerg-rogen.jpg";
 import messageIcon from "icons/message.svg";
 
-
 import { MyIdeas } from "./home/my-ideas";
 import { MyStream } from "./home/my-stream";
-import { SplashScreen } from "./home/splashscreen";
 
 import styles from "./home.module.css";
 
-export const Home: React.FC = () => (
+export const Home: FC = () => (
   <Fragment>
-    <SplashScreen />
     <IonPage>
       <IonHeader>
         <IonToolbar>
@@ -63,11 +60,6 @@ export const Home: React.FC = () => (
           </Section>
         </Container>
       </IonContent>
-      {/*<IonFooter>
-      <IonToolbar>
-        <IonSearchbar value="XXX" />
-      </IonToolbar>
-    </IonFooter>*/}
     </IonPage>
   </Fragment>
 );

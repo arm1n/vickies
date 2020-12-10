@@ -8,6 +8,7 @@
 
 	margin: 0 0 1rem;
 	font-weight: bold;
+	color: var(--text-color);
 	font-size: clamp(var(--min), var(--clamp), var(--max));
 }
 
@@ -45,4 +46,35 @@
 
 .h6 {
 	--size: 1.125rem;
+}
+
+.dark {
+	--text-color: var(--ion-color-dark);
+}
+.medium {
+	--text-color: var(--ion-color-medium);
+}
+.light {
+	--text-color: var(--ion-color-light);
+}
+.primary {
+	--text-color: var(--ion-color-primary);
+}
+.secondary {
+	--text-color: var(--ion-color-secondary);
+}
+.tertiary {
+	--text-color: var(--ion-color-tertiary);
+}
+.success {
+	--text-color: var(--ion-color-success);
+}
+.warning {
+	--text-color: var(--ion-color-warning);
+}
+.danger {
+	--text-color: var(--ion-color-danger);
+}
+.main {
+	--text-color: var(--ion-color-main);
 }

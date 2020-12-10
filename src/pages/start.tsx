@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from "react";
+import React, { FC, useMemo, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 
 import logoVariant1 from "icons/logo-variant1.svg";
@@ -7,7 +7,7 @@ import logoVariant3 from "icons/logo-variant3.svg";
 
 import { Text } from "components";
 
-import styles from "./splashscreen.module.css";
+import styles from "./start.module.css";
 
 const THEMES = [
   {
@@ -24,10 +24,20 @@ const THEMES = [
   },
 ];
 
-export const SplashScreen: React.FC = () => {
+type StartProps = {
+  onHide?: () => void;
+}
+
+export const Start: FC<StartProps> = ({ onHide }) => {
   const [isVisible, setIsVisible] = useState(true);
   const variant = useMemo(() => THEMES[~~(Math.random() * THEMES.length)], []);
-  const clickHandler = useCallback(() => setIsVisible(false), []);
+  const clickHandler = useCallback(() => {
+    setIsVisible(false);
+
+    if (typeof onHide === 'function') {
+      setTimeout(() => onHide(), 1000);
+    }
+  }, [onHide]);
   const wrapperClassNames = useMemo(
     () =>
       [

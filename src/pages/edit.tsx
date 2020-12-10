@@ -1,40 +1,34 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Redirect } from "react-router-dom";
+import React, { FC, useMemo, useCallback, useEffect, useState } from "react";
+import { Redirect, useParams } from "react-router-dom";
 import {
   IonContent,
   IonHeader,
   IonPage,
-  IonButton,
+  IonTitle,
   IonToolbar,
   IonButtons,
   IonBackButton,
-  IonLoading,
+  IonButton,
 } from "@ionic/react";
 
-import { Container, Section } from "components";
-import { KEY_IDEA, setItem } from "utils";
+import { getItem } from "utils";
+import { Container, Section, Text } from "components";
 
 import { Form } from "./add/form";
 
 // import styles from "./add.module.css";
 
-export const Add: React.FC = () => {
+export const Edit: FC = () => {
+  const { key } = useParams();
+
   const [title, setTitle] = useState<string | null>(null);
   const [text, setText] = useState<string | null>(null);
   const [image, setImage] = useState<string | null>(null);
-  const [showLoading, setShowLoading] = useState(false);
-  const [isSaved, setIsSaved] = useState(false);
   const [isValid, setIsValid] = useState(false);
 
-  const handleDidDismiss = useCallback(() => {
-    setIsSaved(true);
-  }, []);
+  const item = useMemo(() => getItem(key), [key]);
 
-  const handleSave = useCallback(() => {
-    const data = { title, text, image };
-    setItem(KEY_IDEA, data);
-    setShowLoading(true);
-  }, [title, text, image]);
+  const handleShare = useCallback(() => {}, []);
 
   useEffect(() => {
     const isTitleValid = typeof title === "string" && title.length > 0;
@@ -42,8 +36,14 @@ export const Add: React.FC = () => {
     setIsValid(isTitleValid && isTextValid);
   }, [title, text]);
 
-  if (isSaved) {
-    return <Redirect to={`/edit/${KEY_IDEA}`} />;
+  useEffect(() => {
+    setTitle(item.title);
+    setText(item.text);
+    setImage(item.image);
+  }, [item]);
+
+  if (item === null) {
+    return <Redirect to="/home" />;
   }
 
   return (
@@ -59,11 +59,18 @@ export const Add: React.FC = () => {
               fill="solid"
               color="main"
               strong={true}
-              onClick={handleSave}
+              onClick={handleShare}
             >
-              save
+              share
             </IonButton>
           </IonButtons>
+          <IonTitle>
+            <div className="ion-text-center">
+              <Text color="main" size="md" bold={true}>
+                my vickie
+              </Text>
+            </div>
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -72,9 +79,11 @@ export const Add: React.FC = () => {
             <IonTitle size="large">Add</IonTitle>
           </IonToolbar>
         </IonHeader>*/}
-        <Container>
-          <Section>
+
+        <Section>
+          <Container>
             <Form
+              isNew={false}
               title={title}
               text={text}
               image={image}
@@ -82,14 +91,8 @@ export const Add: React.FC = () => {
               onChangeText={setText}
               onChangeImage={setImage}
             />
-          </Section>
-        </Container>
-        <IonLoading
-          isOpen={showLoading}
-          onDidDismiss={handleDidDismiss}
-          message={"Saving your idea..."}
-          duration={3000}
-        />
+          </Container>
+        </Section>
       </IonContent>
     </IonPage>
   );

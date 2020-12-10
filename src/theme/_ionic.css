@@ -5,8 +5,10 @@
 
 :root {
   /** typography */
+  /*
   --ion-font-family: var(--font-family-default);
-  /*--ionicon-stroke-width: 16px;*/
+  --ionicon-stroke-width: 16px;
+  */
 
   /** text color */
   --ion-text-color: var(--ion-color-dark);

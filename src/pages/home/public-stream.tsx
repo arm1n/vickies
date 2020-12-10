@@ -58,9 +58,9 @@ export const PublicStream: FC = () => (
 				time="7min"
 				avatar={profile_philipp_schwab}
 				title="Grillable Guacamole"
-				likes={932}
-				dislikes={472}
-				comments={153}
+				likes={753}
+				dislikes={38}
+				comments={23}
 				text={`Barbecues are amazing. No doubt about that! The selfmade sauces shouldn´t be missed. And Guacamole is the best, no matter what you grill. Imagine the combination of both. How about a grillable Guacamole.
 
 					I have no idea yet, but maybe someone could give me some ideas. Thanks!`}
@@ -82,7 +82,7 @@ export const PublicStream: FC = () => (
 				avatar={profile_jack_walker}
 				title="NAS USB-Sticks"
 				likes={683}
-				dislikes={238}
+				dislikes={34}
 				comments={49}
 				text={`How about that: Although the world has a lot of cloud storage solutions and some people are having NAS Systems in their homes, most people aren´t having their data saved twice for security reasons (breakdown of hardware).
 
@@ -149,9 +149,9 @@ export const PublicStream: FC = () => (
 				time="1d"
 				avatar={profile_isabella_moore}
 				title="ATMs with face recognition"
-				likes={542}
-				dislikes={135}
-				comments={120}
+				likes={544}
+				dislikes={92}
+				comments={77}
 				text={`I can enter my banking app including my account with my face and I can confirm my transactions with my thumb. Why can't I, if I want it, do the same at the ATM (maybe in my homecountry)? It saves plastic, postal services and i cannot forget it.`}
 				tags={[
 					"futurebanking",

@@ -7,3 +7,12 @@ ion-icon {
 ion-avatar {
 	--border-radius: 0.25rem;
 }
+
+ion-input,
+ion-textarea{
+	--ion-font-family: var(--font-family-default);
+}
+
+ion-textarea textarea {
+	min-height: 60px; 
+}

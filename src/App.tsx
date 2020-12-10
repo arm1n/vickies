@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC, useState, useCallback } from "react";
 import { Redirect, Route } from "react-router-dom";
 import {
   IonApp,
@@ -11,7 +11,7 @@ import {
 import { IonReactHashRouter } from "@ionic/react-router";
 // import { ellipseOutline, squareOutline, triangle } from "ionicons/icons";
 
-import { Home, Search, Add, Likes, Ideas } from "pages";
+import { Start, Home, Search, Add, Edit, Likes, Ideas } from "pages";
 
 import homeIcon from "icons/home.svg";
 import searchIcon from "icons/search.svg";
@@ -39,38 +39,59 @@ import "./theme/main.css";
 
 import styles from "./App.module.css";
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactHashRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/home" component={Home} exact={true} />
-          <Route path="/search" component={Search} exact={true} />
-          <Route path="/likes" component={Likes} exact={true} />
-          <Route path="/add" component={Add} exact={true} />
-          <Route path="/ideas" component={Ideas} exact={true} />
-          <Route path="/" render={() => <Redirect to="/home" />} exact={true} />
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom" className={styles.tabbar}>
-          <IonTabButton layout="label-hide" tab="home" href="/home">
-            <IonIcon src={homeIcon} />
-          </IonTabButton>
-          <IonTabButton layout="label-hide" tab="search" href="/search">
-            <IonIcon icon={searchIcon} />
-          </IonTabButton>
-          <IonTabButton layout="label-hide" tab="add" href="/add">
-            <IonIcon icon={addIcon} />
-          </IonTabButton>
-          <IonTabButton layout="label-hide" tab="likes" href="/likes">
-            <IonIcon icon={likesIcon} />
-          </IonTabButton>
-          <IonTabButton layout="label-hide" tab="ideas" href="/ideas">
-            <IonIcon icon={ideasIcon} />
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactHashRouter>
-  </IonApp>
-);
+const App: FC = () => {
+  const [initialized, setInitialized] = useState(false);
+  const hideHandler = useCallback(() => setInitialized(true), []);
+  return (
+    <IonApp>
+      <IonReactHashRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/home" component={Home} exact={true} />
+            <Route path="/search" component={Search} exact={true} />
+            <Route path="/likes" component={Likes} exact={true} />
+            <Route path="/add" component={Add} exact={true} />
+            <Route path="/edit/:key" component={Edit} exact={true} />
+            <Route path="/ideas" component={Ideas} exact={true} />
+            <Route
+              path="/start"
+              render={() =>
+                initialized ? (
+                  <Redirect to="/home" />
+                ) : (
+                  <Start onHide={hideHandler} />
+                )
+              }
+              exact={true}
+            />
+            <Route
+              path="/"
+              render={() => <Redirect to="/start" />}
+              exact={true}
+            />
+            <Route render={() => <Redirect to="/home" />} />
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom" className={styles.tabbar}>
+            <IonTabButton layout="label-hide" tab="home" href="/home">
+              <IonIcon src={homeIcon} />
+            </IonTabButton>
+            <IonTabButton layout="label-hide" tab="search" href="/search">
+              <IonIcon icon={searchIcon} />
+            </IonTabButton>
+            <IonTabButton layout="label-hide" tab="add" href="/add">
+              <IonIcon icon={addIcon} />
+            </IonTabButton>
+            <IonTabButton layout="label-hide" tab="likes" href="/likes">
+              <IonIcon icon={likesIcon} />
+            </IonTabButton>
+            <IonTabButton layout="label-hide" tab="ideas" href="/ideas">
+              <IonIcon icon={ideasIcon} />
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactHashRouter>
+    </IonApp>
+  );
+};
 
 export default App;
