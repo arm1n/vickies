@@ -48,6 +48,7 @@ export const CompanyStream: FC = ({ children }) => (
 					"thinktanks",
 				]}
 				images={[idea11_1, idea11_2, idea11_3]}
+				canShare={false}
 			/>
 			<hr />
 			<StreamItem
@@ -70,6 +71,7 @@ export const CompanyStream: FC = ({ children }) => (
 					"workatmosphere"
 				]}
 				images={[idea12_1, idea12_2, idea12_3]}
+				canShare={false}
 			/>
 		</Section>
 	</div>

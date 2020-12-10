@@ -1,4 +1,11 @@
-import React, { FC, Fragment, useState, useCallback, useMemo } from "react";
+import React, {
+	FC,
+	Fragment,
+	cloneElement,
+	useState,
+	useCallback,
+	useMemo,
+} from "react";
 import { IonLabel, IonBadge, IonSegment, IonSegmentButton } from "@ionic/react";
 
 import { Idea, KEY_IDEA, getItem, calculateRemainingTime } from "utils";
@@ -47,7 +54,7 @@ export const MyStream: FC = () => {
 		} = idea;
 
 		if (!isPublished) {
-			return false;
+			return null;
 		}
 
 		const user = isAnonymous ? "Anonymous" : "Hansjörg Rogen";
@@ -67,21 +74,18 @@ export const MyStream: FC = () => {
 		].join(" ");
 
 		return (
-			<Fragment>
-				<StreamItem
-					user={user}
-					avatar={avatar}
-					time={time}
-					title={title}
-					likes={0}
-					dislikes={0}
-					comments={0}
-					text={text}
-					tags={tags}
-					images={images}
-				/>
-				<hr />
-			</Fragment>
+			<StreamItem
+				user={user}
+				avatar={avatar}
+				time={time}
+				title={title}
+				likes={0}
+				dislikes={0}
+				comments={0}
+				text={text}
+				tags={tags}
+				images={images}
+			/>
 		);
 	}, [idea]);
 
@@ -108,7 +112,7 @@ export const MyStream: FC = () => {
 			case "company":
 			case "department":
 			case "team":
-				return item;
+				return cloneElement(item, { canShare: false });
 			default:
 				return null;
 		}
@@ -154,10 +158,24 @@ export const MyStream: FC = () => {
 			</Section>
 			<Section>
 				{activeSegment === SEGMENT.PUBLIC && (
-					<PublicStream>{publicStreamItem}</PublicStream>
+					<PublicStream>
+						{publicStreamItem && (
+							<Fragment>
+								{publicStreamItem}
+								<hr />
+							</Fragment>
+						)}
+					</PublicStream>
 				)}
 				{activeSegment === SEGMENT.COMPANY && (
-					<CompanyStream>{companyStreamItem}</CompanyStream>
+					<CompanyStream>
+						{companyStreamItem && (
+							<Fragment>
+								{companyStreamItem}
+								<hr />
+							</Fragment>
+						)}
+					</CompanyStream>
 				)}
 			</Section>
 		</div>

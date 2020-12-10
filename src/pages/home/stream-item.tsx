@@ -34,6 +34,7 @@ type StreamItemProps = {
 	dislikes: number;
 	comments: number;
 	images?: string[];
+	canShare?: boolean;
 };
 
 export const StreamItem: FC<StreamItemProps> = ({
@@ -47,6 +48,7 @@ export const StreamItem: FC<StreamItemProps> = ({
 	likes,
 	dislikes,
 	comments,
+	canShare = true,
 }) => {
 	const [showTags, setShowTags] = useState(() => text.length < 125);
 	const [popoverEvent, setPopoverEvent] = useState<MouseEvent | undefined>(
@@ -218,18 +220,20 @@ export const StreamItem: FC<StreamItemProps> = ({
 							src={messageIcon}
 						/>
 					</IonButton>
-					<IonButton
-						color="dark"
-						fill="clear"
-						size="small"
-						className={styles.actionbutton}
-					>
-						<IonIcon
-							slot="icon-only"
+					{canShare && (
+						<IonButton
+							color="dark"
+							fill="clear"
 							size="small"
-							src={uploadIcon}
-						/>
-					</IonButton>
+							className={styles.actionbutton}
+						>
+							<IonIcon
+								slot="icon-only"
+								size="small"
+								src={uploadIcon}
+							/>
+						</IonButton>
+					)}
 				</div>
 			</div>
 		</div>
