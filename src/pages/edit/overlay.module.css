@@ -1,0 +1,39 @@
+.wrapper {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	outline: 0;
+	display: flex;
+	position: fixed;
+	align-items: center;
+	justify-content: center;
+	transform: translate3d(0, 0, 0);
+	transition: transform 0.5s ease-in;
+
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+.navbar {
+	top: 1rem;
+	left: 1rem;
+	right: 1rem;
+	display: flex;
+	position: absolute;
+	justify-content: space-between;
+}
+
+.content {
+	width: 90%;
+	margin: 0 1rem;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+}
+
+.text {
+	margin: 0 0 0 0.5rem;
+	padding: 0 0 0.25rem;
+}

@@ -25,17 +25,26 @@
 }
 
 .text {
-	margin: 0 0 1rem;
+	margin: 0 0 0.5rem;
 }
 
 .expandable {
 	padding: var(--form-padding);
 }
 
+.tags {
+	padding: var(--form-padding);
+}
+
+.tag {
+	padding: 0 0.25rem 0 0;
+}
+
 .mediabutton {
 	overflow: hidden;
 	position: relative;
 }
+
 .file {
 	top: 0;
 	left: 0;
@@ -51,4 +60,9 @@
 	display: block;
 	background: none;
 	padding: var(--form-padding);
+}
+
+.img {
+	display: block;
+	margin: 0 0 0.25rem;
 }

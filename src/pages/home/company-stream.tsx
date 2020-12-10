@@ -26,9 +26,10 @@ import idea12_3 from "images/ideas/idea12-3.jpg";
 
 import styles from "./company-stream.module.css";
 
-export const CompanyStream: FC = () => (
+export const CompanyStream: FC = ({ children }) => (
 	<div className={styles.wrapper}>
 		<Section>
+			{children}
 			<StreamItem
 				user="Mia Johnson"
 				time="6h"

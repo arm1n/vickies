@@ -1,5 +1,4 @@
-import React, { useMemo } from "react";
-import type { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useMemo } from "react";
 
 import styles from "./title.module.css";
 

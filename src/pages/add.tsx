@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Redirect } from "react-router-dom";
 import {
+  IonTitle,
   IonContent,
   IonHeader,
   IonPage,
@@ -11,17 +12,15 @@ import {
   IonLoading,
 } from "@ionic/react";
 
-import { Container, Section } from "components";
-import { KEY_IDEA, setItem } from "utils";
+import { Container, Section, Text } from "components";
+import { Idea, KEY_IDEA, setItem } from "utils";
 
 import { Form } from "./add/form";
 
-// import styles from "./add.module.css";
-
 export const Add: React.FC = () => {
-  const [title, setTitle] = useState<string | null>(null);
-  const [text, setText] = useState<string | null>(null);
-  const [image, setImage] = useState<string | null>(null);
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [images, setImages] = useState<string[]>([]);
   const [showLoading, setShowLoading] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [isValid, setIsValid] = useState(false);
@@ -31,14 +30,14 @@ export const Add: React.FC = () => {
   }, []);
 
   const handleSave = useCallback(() => {
-    const data = { title, text, image };
-    setItem(KEY_IDEA, data);
+    const data = { title, text, images, isPublished: false };
+    setItem<Idea>(KEY_IDEA, data);
     setShowLoading(true);
-  }, [title, text, image]);
+  }, [title, text, images]);
 
   useEffect(() => {
-    const isTitleValid = typeof title === "string" && title.length > 0;
-    const isTextValid = typeof text === "string" && text.length > 0;
+    const isTitleValid = title.length > 0;
+    const isTextValid = text.length > 0;
     setIsValid(isTitleValid && isTextValid);
   }, [title, text]);
 
@@ -64,6 +63,13 @@ export const Add: React.FC = () => {
               save
             </IonButton>
           </IonButtons>
+          <IonTitle>
+            <div className="ion-text-center">
+              <Text color="main" size="md" bold={true}>
+                create new vickie
+              </Text>
+            </div>
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -77,10 +83,10 @@ export const Add: React.FC = () => {
             <Form
               title={title}
               text={text}
-              image={image}
+              images={images}
               onChangeTitle={setTitle}
               onChangeText={setText}
-              onChangeImage={setImage}
+              onChangeImages={setImages}
             />
           </Section>
         </Container>

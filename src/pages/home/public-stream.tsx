@@ -50,9 +50,10 @@ import idea8_3 from "images/ideas/idea8-3.jpg";
 
 import styles from "./public-stream.module.css";
 
-export const PublicStream: FC = () => (
+export const PublicStream: FC = ({ children }) => (
 	<div className={styles.wrapper}>
 		<Section>
+			{children}
 			<StreamItem
 				user="Philipp Schwab"
 				time="7min"

@@ -1,4 +1,4 @@
-export const setItem = (key: string, data: any) => {
+export const setItem = <T>(key: string, data: T) => {
 	try {
 		localStorage.setItem(key, JSON.stringify(data));
 	} catch(e) {
@@ -6,7 +6,7 @@ export const setItem = (key: string, data: any) => {
 	}
 };
 
-export const getItem = (key: string) => {
+export const getItem = <T = any>(key: string): T | null => {
 	try {
 		const item = localStorage.getItem(key);
 		if (item === null) {
@@ -16,5 +16,14 @@ export const getItem = (key: string) => {
 		return JSON.parse(item);
 	} catch(e) {
 		console.error(e);
+		return null;
 	}
 };
+
+export const removeItem = (key: string) => {
+	try {
+		localStorage.removeItem(key);
+	} catch(e) {
+		console.error(e);
+	}
+}

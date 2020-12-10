@@ -1,0 +1,11 @@
+.wrapper {
+	display: flex;
+	border-radius: 1rem;
+	justify-content: space-evenly;
+	padding: 0.25rem 0.25rem 0.5rem;
+	background: var(--ion-color-primary);
+}
+
+.inverse {
+	background: var(--ion-color-light);
+}

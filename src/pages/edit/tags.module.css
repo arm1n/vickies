@@ -1,0 +1,7 @@
+.chips {
+	margin: 0.5rem 0 1rem;
+}
+
+.ionitem {
+	--inner-padding-end: 8px !important;
+}

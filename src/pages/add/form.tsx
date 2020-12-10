@@ -21,21 +21,23 @@ import styles from "./form.module.css";
 
 type FormProps = {
 	isNew?: boolean;
-	title: string | null;
-	text: string | null;
-	image: string | null;
-	onChangeTitle: (title: string | null) => void;
-	onChangeText: (text: string | null) => void;
-	onChangeImage: (image: string | null) => void;
+	title: string;
+	text: string;
+	images?: string[];
+	tags?: string[];
+	onChangeTitle: (title: string) => void;
+	onChangeText: (text: string) => void;
+	onChangeImages: (images: string[]) => void;
 };
 
 export const Form: FC<FormProps> = ({
 	title,
 	text,
-	image,
+	images = [],
+	tags = [],
 	onChangeTitle,
 	onChangeText,
-	onChangeImage,
+	onChangeImages,
 	isNew = true,
 }) => {
 	const [showImageAlert, setShowImageAlert] = useState(false);
@@ -46,13 +48,6 @@ export const Form: FC<FormProps> = ({
 			onChangeTitle(event.detail.value);
 		},
 		[onChangeTitle]
-	);
-
-	const handleText = useCallback(
-		(event) => {
-			onChangeText(event.detail.value);
-		},
-		[onChangeText]
 	);
 
 	const handleAddImage = useCallback(
@@ -69,10 +64,10 @@ export const Form: FC<FormProps> = ({
 					return;
 				}
 
-				onChangeImage(reader.result);
+				onChangeImages([reader.result]);
 			};
 		},
-		[onChangeImage]
+		[onChangeImages]
 	);
 
 	const handleClickImage = useCallback(() => {
@@ -80,8 +75,8 @@ export const Form: FC<FormProps> = ({
 	}, []);
 
 	const handleRemoveImage = useCallback(() => {
-		onChangeImage(null);
-	}, [onChangeImage]);
+		onChangeImages([]);
+	}, [onChangeImages]);
 
 	const handleDidDismissImageAlert = useCallback(() => {
 		setShowImageAlert(false);
@@ -96,17 +91,27 @@ export const Form: FC<FormProps> = ({
 			}
 
 			const textarea = await ionTextarea.getInputElement();
-			const resizeHandler = () => {
+			const inputHandler = () => {
 				textarea.style.height = "auto";
 				textarea.style.height = `${textarea.scrollHeight}px`;
 			};
 
-			textarea.addEventListener("input", resizeHandler);
+			const changeHandler = (event: Event) => {
+				const element = event.target as HTMLTextAreaElement;
+				onChangeText(element.value);
+			};
+
+			textarea.addEventListener("input", inputHandler);
+			textarea.addEventListener("change", changeHandler);
+
 			teardowns.push(() => {
-				textarea.removeEventListener("input", resizeHandler);
+				textarea.removeEventListener("input", changeHandler);
+			});
+			teardowns.push(() => {
+				textarea.removeEventListener("input", inputHandler);
 			});
 
-			setTimeout(resizeHandler, 0);
+			setTimeout(inputHandler, 0);
 		};
 
 		getInputElement();
@@ -114,7 +119,7 @@ export const Form: FC<FormProps> = ({
 		return () => {
 			teardowns.forEach((teardown) => teardown());
 		};
-	}, [showTextArea]);
+	}, [onChangeText, showTextArea]);
 
 	return (
 		<div className={styles.wrapper}>
@@ -134,7 +139,7 @@ export const Form: FC<FormProps> = ({
 							value={title}
 							autofocus={true}
 							onIonChange={handleTitle}
-							placeholder="Title of my vickie?"
+							placeholder="Title of your vickie"
 						/>
 					</div>
 					<div className={styles.text}>
@@ -142,7 +147,6 @@ export const Form: FC<FormProps> = ({
 							<IonTextarea
 								value={text}
 								ref={textareaRef}
-								onIonChange={handleText}
 								placeholder="Write down your idea"
 							/>
 						) : (
@@ -159,12 +163,25 @@ export const Form: FC<FormProps> = ({
 						)}
 					</div>
 
-					{image && (
+					{tags.length > 0 && (
+						<div className={styles.tags}>
+							{tags.map((tag, index) => (
+								<span key={index} className={styles.tag}>
+									<Text color="main">#{tag}</Text>
+								</span>
+							))}
+						</div>
+					)}
+
+					{images.length > 0 && (
 						<button
 							className={styles.image}
 							onClick={handleClickImage}
 						>
-							<img src={image} alt="" />
+							<img src={images[0]} alt="" className={styles.img} />
+							<Text color="medium" size="xs">
+								Click to remove
+							</Text>
 						</button>
 					)}
 				</div>
