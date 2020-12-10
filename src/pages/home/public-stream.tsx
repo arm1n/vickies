@@ -77,7 +77,7 @@ export const PublicStream: FC = () => (
 			/>
 			<hr />
 			<StreamItem
-				user="Isabella Moore"
+				user="Jack Walker"
 				time="49min"
 				avatar={profile_jack_walker}
 				title="NAS USB-Sticks"

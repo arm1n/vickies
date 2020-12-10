@@ -33,7 +33,7 @@ export const CompanyStream: FC = () => (
 				user="Mia Johnson"
 				time="6h"
 				avatar={profile_mia_johnson}
-				title="Business case"
+				title="Think Tank"
 				likes={239}
 				dislikes={95}
 				comments={32}
