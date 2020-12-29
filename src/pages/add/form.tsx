@@ -20,7 +20,6 @@ import { Text } from "components";
 import styles from "./form.module.css";
 
 type FormProps = {
-	isNew?: boolean;
 	title: string;
 	text: string;
 	images?: string[];
@@ -38,10 +37,8 @@ export const Form: FC<FormProps> = ({
 	onChangeTitle,
 	onChangeText,
 	onChangeImages,
-	isNew = true,
 }) => {
 	const [showImageAlert, setShowImageAlert] = useState(false);
-	const [showTextArea, setShowTextArea] = useState(isNew);
 	const textareaRef = useRef<HTMLIonTextareaElement>(null);
 	const handleTitle = useCallback(
 		(event) => {
@@ -119,7 +116,7 @@ export const Form: FC<FormProps> = ({
 		return () => {
 			teardowns.forEach((teardown) => teardown());
 		};
-	}, [onChangeText, showTextArea]);
+	}, [onChangeText]);
 
 	return (
 		<div className={styles.wrapper}>
@@ -143,24 +140,11 @@ export const Form: FC<FormProps> = ({
 						/>
 					</div>
 					<div className={styles.text}>
-						{showTextArea ? (
-							<IonTextarea
-								value={text}
-								ref={textareaRef}
-								placeholder="Write down your idea"
-							/>
-						) : (
-							<div className={styles.expandable}>
-								<Text
-									size="md"
-									truncate={125}
-									expandable={true}
-									onToggleMore={setShowTextArea}
-								>
-									{text}
-								</Text>
-							</div>
-						)}
+						<IonTextarea
+							value={text}
+							ref={textareaRef}
+							placeholder="Write down your idea"
+						/>
 					</div>
 
 					{tags.length > 0 && (
@@ -178,7 +162,11 @@ export const Form: FC<FormProps> = ({
 							className={styles.image}
 							onClick={handleClickImage}
 						>
-							<img src={images[0]} alt="" className={styles.img} />
+							<img
+								src={images[0]}
+								alt=""
+								className={styles.img}
+							/>
 							<Text color="medium" size="xs">
 								Click to remove
 							</Text>

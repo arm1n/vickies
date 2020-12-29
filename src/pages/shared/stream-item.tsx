@@ -1,4 +1,5 @@
 import React, { FC, useState, useMemo, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import {
 	IonList,
 	IonItem,
@@ -13,56 +14,41 @@ import {
 } from "@ionic/react";
 import { ellipsisHorizontal } from "ionicons/icons";
 
-import likeIcon from "icons/like.svg";
-import dislikeIcon from "icons/dislike.svg";
-import commentIcon from "icons/comment.svg";
-import messageIcon from "icons/message.svg";
-import uploadIcon from "icons/upload.svg";
-
+import { StoreItem } from "utils";
 import { Text, Title } from "components";
+
+import { ActionButtons } from "./action-buttons";
+import { TimeDifference } from "./time-difference";
 
 import styles from "./stream-item.module.css";
 
-type StreamItemProps = {
-	user: string;
-	avatar: string;
-	time: string;
-	title: string;
-	text: string;
-	tags?: string[];
-	likes: number;
-	dislikes: number;
-	comments: number;
-	images?: string[];
-	canShare?: boolean;
+type StreamItemProps = StoreItem & {
+	showText?: boolean;
+	showActions?: boolean;
 };
 
-export const StreamItem: FC<StreamItemProps> = ({
-	avatar,
-	user,
-	title,
-	time,
-	text,
-	tags = [],
-	images = [],
-	likes,
-	dislikes,
-	comments,
-	canShare = true,
-}) => {
+export const StreamItem: FC<StreamItemProps> = (item) => {
+	const {
+		id,
+		avatar,
+		user,
+		title,
+		deadline,
+		text,
+		tags = [],
+		images = [],
+		isPublished,
+		isAnonymous,
+		showText = false,
+		showActions = true,
+	} = item;
+
+	const history = useHistory();
 	const [showTags, setShowTags] = useState(() => text.length < 125);
 	const [popoverEvent, setPopoverEvent] = useState<MouseEvent | undefined>(
 		undefined
 	);
 	const [pagerElement, setPagerElement] = useState<HTMLElement | null>(null);
-
-	const showPopoverHandler = useCallback((event) => {
-		event.persist();
-		setPopoverEvent(event.nativeEvent);
-	}, []);
-	const hidePopoverHandler = useCallback((event) => {
-		setPopoverEvent(undefined);
-	}, []);
 
 	const showPopover = useMemo(() => !!popoverEvent, [popoverEvent]);
 	const sliderOptions = useMemo(
@@ -79,11 +65,53 @@ export const StreamItem: FC<StreamItemProps> = ({
 		[pagerElement]
 	);
 
-	return (
-		<div className={styles.wrapper}>
+	const userName = useMemo(() => (isAnonymous ? "Anonymous" : user), [
+		isAnonymous,
+		user,
+	]);
+	const avatarUrl = useMemo(
+		() =>
+			isAnonymous
+				? "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
+				: avatar,
+		[isAnonymous, avatar]
+	);
+
+	const clickHandler = useCallback(
+		(event) => {
+			history.push(`/idea/${id}`);
+		},
+		[history, id]
+	);
+
+	const showPopoverHandler = useCallback((event) => {
+		event.persist();
+		event.stopPropagation();
+		setPopoverEvent(event.nativeEvent);
+	}, []);
+	const hidePopoverHandler = useCallback((event) => {
+		event.stopPropagation();
+		setPopoverEvent(undefined);
+	}, []);
+
+	const toggleMoreHandler = useCallback((state, event) => {
+		event.stopPropagation();
+		setShowTags(true);
+	}, []);
+
+	const dummyHandler = useCallback((event) => {
+		event.stopPropagation();
+	}, []);
+
+	return isPublished ? (
+		<div className={styles.wrapper} onClick={clickHandler}>
 			<div className={styles.profile}>
 				<IonAvatar className={styles.avatar}>
-					<img src={avatar} alt={user} className={styles.avatarimg} />
+					<img
+						src={avatarUrl}
+						alt={userName}
+						className={styles.avatarimg}
+					/>
 				</IonAvatar>
 			</div>
 			<div className={styles.content}>
@@ -97,12 +125,12 @@ export const StreamItem: FC<StreamItemProps> = ({
 						<div className={styles.subtitle}>
 							<Text size="sm">
 								<span className={styles.postedby}>
-									by {user}
+									by {userName}
 								</span>
 								<span> </span>
 								<span className={styles.postedat}>
 									<Text color="main" size="sm" bold={true}>
-										- {time}
+										- <TimeDifference date={deadline} />
 									</Text>
 								</span>
 							</Text>
@@ -117,11 +145,17 @@ export const StreamItem: FC<StreamItemProps> = ({
 						>
 							<IonList>
 								<IonListHeader>
-									<IonLabel>Aktionen</IonLabel>
+									<IonLabel>Actions</IonLabel>
 								</IonListHeader>
-								<IonItem button={true}>Melden</IonItem>
-								<IonItem button={true} lines="none">
-									Ausblenden
+								<IonItem button={true} onClick={dummyHandler}>
+									Report
+								</IonItem>
+								<IonItem
+									button={true}
+									onClick={dummyHandler}
+									lines="none"
+								>
+									Hide idea
 								</IonItem>
 							</IonList>
 						</IonPopover>
@@ -142,9 +176,9 @@ export const StreamItem: FC<StreamItemProps> = ({
 				<div className={styles.text}>
 					<Text
 						nl2br={true}
-						truncate={125}
-						expandable={true}
-						onToggleMore={setShowTags}
+						expandable={!showText}
+						truncate={showText ? 0 : 125}
+						onToggleMore={toggleMoreHandler}
 					>
 						{text}
 					</Text>
@@ -161,7 +195,12 @@ export const StreamItem: FC<StreamItemProps> = ({
 
 				{images.length > 0 && (
 					<div className={styles.images}>
-						<div ref={setPagerElement} className={styles.pager} />
+						{images.length > 1 && (
+							<div
+								ref={setPagerElement}
+								className={styles.pager}
+							/>
+						)}
 						<IonSlides
 							pager={true}
 							options={sliderOptions}
@@ -180,62 +219,17 @@ export const StreamItem: FC<StreamItemProps> = ({
 					</div>
 				)}
 
-				<div className={styles.actions}>
-					<IonButton
-						color="dark"
-						fill="clear"
-						size="small"
-						className={styles.actionbutton}
-					>
-						<IonIcon slot="start" size="small" src={likeIcon} />
-						<IonLabel>{likes}</IonLabel>
-					</IonButton>
-					<IonButton
-						color="dark"
-						fill="clear"
-						size="small"
-						className={styles.actionbutton}
-					>
-						<IonIcon slot="start" size="small" src={dislikeIcon} />
-						<IonLabel>{dislikes}</IonLabel>
-					</IonButton>
-					<IonButton
-						color="dark"
-						fill="clear"
-						size="small"
-						className={styles.actionbutton}
-					>
-						<IonIcon slot="start" size="small" src={commentIcon} />
-						<IonLabel>{comments}</IonLabel>
-					</IonButton>
-					<IonButton
-						color="dark"
-						fill="clear"
-						size="small"
-						className={styles.actionbutton}
-					>
-						<IonIcon
-							slot="icon-only"
-							size="small"
-							src={messageIcon}
-						/>
-					</IonButton>
-					{canShare && (
-						<IonButton
-							color="dark"
-							fill="clear"
-							size="small"
-							className={styles.actionbutton}
-						>
-							<IonIcon
-								slot="icon-only"
-								size="small"
-								src={uploadIcon}
-							/>
-						</IonButton>
-					)}
-				</div>
+				{showActions && (
+					<ActionButtons
+						storeItem={item}
+						onClickLike={dummyHandler}
+						onClickDislike={dummyHandler}
+						onClickComment={dummyHandler}
+						onClickMessage={dummyHandler}
+						onClickShare={dummyHandler}
+					/>
+				)}
 			</div>
 		</div>
-	);
+	) : null;
 };

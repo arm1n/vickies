@@ -2,21 +2,21 @@ import React, { FC } from "react";
 import { Link } from "react-router-dom";
 
 import { Text } from "components";
-import { Idea, KEY_IDEA, getItem } from "utils";
+import { StoreItem, KEY_ITEM, getItem } from "utils";
 
 import styles from "./my-ideas.module.css";
 
 const TRUNCATE = 18;
 
 export const MyIdeas: FC = () => {
-	const idea = getItem<Idea>(KEY_IDEA);
+	const storeItem = getItem<StoreItem>(KEY_ITEM);
 
 	return (
 		<div className={styles.wrapper}>
-			{idea && (
-				<Link to="/edit/my-idea" className={styles.item}>
+			{storeItem && (
+				<Link to={`edit/${KEY_ITEM}`} className={styles.item}>
 					<Text color="dark" type="special" size="sm" truncate={TRUNCATE}>
-						{idea.title}
+						{storeItem.title}
 					</Text>
 				</Link>
 			)}
@@ -35,7 +35,7 @@ export const MyIdeas: FC = () => {
 					Journal budget
 				</Text>
 			</div>
-			{!idea && (
+			{!storeItem && (
 				<div className={styles.item}>
 					<Text type="special" size="sm" truncate={TRUNCATE}>
 						seamless parking for clients

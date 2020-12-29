@@ -12,8 +12,10 @@ import {
   IonLoading,
 } from "@ionic/react";
 
+import { StoreItem, KEY_ITEM, setItem } from "utils";
 import { Container, Section, Text } from "components";
-import { Idea, KEY_IDEA, setItem } from "utils";
+
+import profile_hansjoerg_rogen from "images/profiles/profile-hansjoerg-rogen.jpg";
 
 import { Form } from "./add/form";
 
@@ -30,8 +32,26 @@ export const Add: React.FC = () => {
   }, []);
 
   const handleSave = useCallback(() => {
-    const data = { title, text, images, isPublished: false };
-    setItem<Idea>(KEY_IDEA, data);
+    const data = {
+      id: KEY_ITEM,
+      user: "Hansjörg Rogen",
+      avatar: profile_hansjoerg_rogen,
+
+      title,
+      text,
+      images,
+      tags: [],
+      deadline: "",
+      sharingValue: "world" as const,
+      isAnonymous: false,
+      isPublished: false,
+      publishedDate: "",
+      likes: 0,
+      dislikes: 0,
+      comments: 0,
+      commentItems: []
+    };
+    setItem<StoreItem>(KEY_ITEM, data);
     setShowLoading(true);
   }, [title, text, images]);
 
@@ -42,7 +62,7 @@ export const Add: React.FC = () => {
   }, [title, text]);
 
   if (isSaved) {
-    return <Redirect to={`/edit/${KEY_IDEA}`} />;
+    return <Redirect to={`/edit/${KEY_ITEM}`} />;
   }
 
   return (
@@ -73,11 +93,6 @@ export const Add: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        {/*<IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Add</IonTitle>
-          </IonToolbar>
-        </IonHeader>*/}
         <Container>
           <Section>
             <Form

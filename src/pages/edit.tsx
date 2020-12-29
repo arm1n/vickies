@@ -12,7 +12,14 @@ import {
   IonLoading,
 } from "@ionic/react";
 
-import { KEY_IDEA, getItem, setItem, removeItem, Idea, SharingValue } from "utils";
+import {
+  KEY_ITEM,
+  getItem,
+  setItem,
+  removeItem,
+  StoreItem,
+  SharingValue,
+} from "utils";
 import { Container, Section, Text } from "components";
 
 import { Form } from "./add/form";
@@ -24,7 +31,7 @@ import { Settings } from "./edit/settings";
 // import styles from "./add.module.css";
 
 export const Edit: FC = () => {
-  const { key } = useParams();
+  const { id } = useParams();
 
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -39,7 +46,7 @@ export const Edit: FC = () => {
   const [isSaved, setIsSaved] = useState(false);
   const [isValid, setIsValid] = useState(false);
 
-  const [idea, setIdea] = useState(() => getItem<Idea>(key));
+  const [storeItem, setStoreItem] = useState(() => getItem<StoreItem>(id));
 
   const handleDidDismiss = useCallback(() => {
     setIsSaved(true);
@@ -50,24 +57,37 @@ export const Edit: FC = () => {
   }, []);
 
   const handleOverlayClickStop = useCallback(() => {
-    removeItem(KEY_IDEA);
-    setIdea(null)
+    removeItem(KEY_ITEM);
+    setStoreItem(null);
   }, []);
 
   const handleShare = useCallback(() => {
     const data = {
-      title,
-      text,
-      images,
-      tags,
-      deadline,
-      sharingValue,
-      isAnonymous,
-      isPublished: true,
+      ...storeItem!,
+      ...{
+        title,
+        text,
+        images,
+        tags,
+        deadline,
+        sharingValue,
+        isAnonymous,
+        isPublished: true,
+        publishedDate: new Date().toISOString(),
+      },
     };
-    setItem<Idea>(KEY_IDEA, data);
+    setItem<StoreItem>(KEY_ITEM, data);
     setShowLoading(true);
-  }, [title, text, images, tags, deadline, sharingValue, isAnonymous]);
+  }, [
+    storeItem,
+    title,
+    text,
+    images,
+    tags,
+    deadline,
+    sharingValue,
+    isAnonymous,
+  ]);
 
   useEffect(() => {
     const isTitleValid = title.length > 0;
@@ -85,7 +105,7 @@ export const Edit: FC = () => {
   }, [title, text, tags, deadline, isPublished]);
 
   useEffect(() => {
-    if (idea === null) {
+    if (storeItem === null) {
       return;
     }
 
@@ -98,7 +118,7 @@ export const Edit: FC = () => {
       isPublished = false,
       sharingValue = "world",
       isAnonymous = false,
-    } = idea;
+    } = storeItem;
     setTitle(title);
     setText(text);
     setImages(images);
@@ -108,9 +128,9 @@ export const Edit: FC = () => {
     setIsAnoymous(isAnonymous);
 
     setIsPublished(isPublished);
-  }, [idea]);
+  }, [storeItem]);
 
-  if (idea === null) {
+  if (storeItem === null) {
     return <Redirect to="/home" />;
   }
 
@@ -146,16 +166,9 @@ export const Edit: FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        {/*<IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Add</IonTitle>
-          </IonToolbar>
-        </IonHeader>*/}
-
         <Section>
           <Container>
             <Form
-              isNew={false}
               title={title}
               text={text}
               images={images}
@@ -184,7 +197,7 @@ export const Edit: FC = () => {
         />
         {isPublished && (
           <Overlay
-            idea={idea}
+            storeItem={storeItem}
             onClickEdit={handleOverlayClickEdit}
             onClickStop={handleOverlayClickStop}
           />

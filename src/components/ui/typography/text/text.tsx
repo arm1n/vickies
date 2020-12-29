@@ -21,7 +21,7 @@ type TextPropsCommon = {
     | "danger"
     | "main"
     | "inherit";
-  onToggleMore?: (state: boolean) => void;
+  onToggleMore?: (state: boolean, event: MouseEvent) => void;
 };
 
 type TextPropsUnion =
@@ -94,10 +94,11 @@ export const Text: FC<TextProps> = ({
     [truncatedText, nl2br]
   );
 
-  const moreHandler = useCallback(() => {
+  const moreHandler = useCallback((event) => {
     setShowMore((oldState) => {
       const newState = !oldState;
-      onToggleMore(newState);
+      onToggleMore(newState, event);
+      
       return newState;
     });
   }, [onToggleMore]);

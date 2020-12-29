@@ -1,0 +1,11 @@
+.wrapper {
+	display: flex;
+}
+
+.button {
+	flex: 1 1 auto;
+	display: flex;
+	align-items: center;
+	--padding-end: 0.25rem;
+	--padding-start: 0.25rem;
+}

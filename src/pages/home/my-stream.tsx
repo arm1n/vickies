@@ -1,19 +1,11 @@
-import React, {
-	FC,
-	Fragment,
-	cloneElement,
-	useState,
-	useCallback,
-	useMemo,
-} from "react";
+import React, { FC, Fragment, useState, useCallback, useMemo } from "react";
 import { IonLabel, IonBadge, IonSegment, IonSegmentButton } from "@ionic/react";
 
-import { Idea, KEY_IDEA, getItem, calculateRemainingTime } from "utils";
+import { StoreItem, KEY_ITEM, getItem } from "utils";
 import { Section, Text } from "components";
 
-import profile_hansjoerg_rogen from "images/profiles/profile-hansjoerg-rogen.jpg";
+import { StreamItem } from "../shared/stream-item";
 
-import { StreamItem } from "./stream-item";
 import { PublicStream } from "./public-stream";
 import { CompanyStream } from "./company-stream";
 
@@ -36,87 +28,28 @@ export const MyStream: FC = () => {
 		setActiveSegment(value);
 	}, []);
 
-	const idea = getItem<Idea>(KEY_IDEA);
+	const storeItem = getItem<StoreItem>(KEY_ITEM);
 
-	const item = useMemo(() => {
-		if (idea === null) {
-			return null;
+	const [publicItem, companyItem] = useMemo(() => {
+		if (storeItem === null) {
+			return [];
 		}
 
-		const {
-			title,
-			text,
-			images = [],
-			tags = [],
-			deadline = "",
-			isPublished = false,
-			isAnonymous = false,
-		} = idea;
-
-		if (!isPublished) {
-			return null;
-		}
-
-		const user = isAnonymous ? "Anonymous" : "Hansjörg Rogen";
-		const avatar = isAnonymous
-			? "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-			: profile_hansjoerg_rogen;
-		const remainingTime = calculateRemainingTime(deadline);
-		if (remainingTime === false) {
-			return null;
-		}
-
-		const { days, hours, minutes } = remainingTime;
-		const time = [
-			days ? `${days}d` : "",
-			hours ? `${hours}h` : "",
-			minutes ? `${minutes}m` : "",
-		].join(" ");
-
-		return (
-			<StreamItem
-				user={user}
-				avatar={avatar}
-				time={time}
-				title={title}
-				likes={0}
-				dislikes={0}
-				comments={0}
-				text={text}
-				tags={tags}
-				images={images}
-			/>
+		const item = (
+			<Fragment>
+				<StreamItem {...storeItem} />
+				<hr />
+			</Fragment>
 		);
-	}, [idea]);
 
-	const publicStreamItem = useMemo(() => {
-		if (idea === null || idea === null) {
-			return null;
-		}
-
-		switch (idea.sharingValue) {
+		switch (storeItem.sharingValue) {
 			case "world":
 			case "followers":
-				return item;
+				return [item, null];
 			default:
-				return null;
+				return [null, item];
 		}
-	}, [idea, item]);
-
-	const companyStreamItem = useMemo(() => {
-		if (item === null || idea === null) {
-			return null;
-		}
-
-		switch (idea.sharingValue) {
-			case "company":
-			case "department":
-			case "team":
-				return cloneElement(item, { canShare: false });
-			default:
-				return null;
-		}
-	}, [idea, item]);
+	}, [storeItem]);
 
 	return (
 		<div className={styles.wrapper}>
@@ -158,24 +91,10 @@ export const MyStream: FC = () => {
 			</Section>
 			<Section>
 				{activeSegment === SEGMENT.PUBLIC && (
-					<PublicStream>
-						{publicStreamItem && (
-							<Fragment>
-								{publicStreamItem}
-								<hr />
-							</Fragment>
-						)}
-					</PublicStream>
+					<PublicStream>{publicItem}</PublicStream>
 				)}
 				{activeSegment === SEGMENT.COMPANY && (
-					<CompanyStream>
-						{companyStreamItem && (
-							<Fragment>
-								{companyStreamItem}
-								<hr />
-							</Fragment>
-						)}
-					</CompanyStream>
+					<CompanyStream>{companyItem}</CompanyStream>
 				)}
 			</Section>
 		</div>

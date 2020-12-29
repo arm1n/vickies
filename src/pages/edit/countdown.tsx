@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState, useMemo } from "react";
 
 import { Text } from "components";
-import { calculateRemainingTime, RemainingTime } from "utils";
+import { calculateTimeDifference, TimeDifference } from "utils";
 
 import styles from "./countdown.module.css";
 
@@ -11,7 +11,7 @@ type CountdownProps = {
 };
 
 export const Countdown: FC<CountdownProps> = ({ endDate, color = "default" }) => {
-	const [remainingTime, setRemainingTime] = useState<RemainingTime>({
+	const [remainingTime, setRemainingTime] = useState<TimeDifference>({
 		days: 0,
 		hours: 0,
 		minutes: 0,
@@ -26,7 +26,7 @@ export const Countdown: FC<CountdownProps> = ({ endDate, color = "default" }) =>
 
 	useEffect(() => {
 		const handler = () => {
-			const remainingTime = calculateRemainingTime(endDate);
+			const remainingTime = calculateTimeDifference(endDate);
 			if (remainingTime === false) {
 				setIsDone(true);
 				return;

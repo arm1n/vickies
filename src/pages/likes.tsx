@@ -7,8 +7,6 @@ import {
   IonToolbar,
 } from "@ionic/react";
 
-// import styles from "./home.module.css";
-
 export const Likes: React.FC = () => {
   return (
     <IonPage>
@@ -18,11 +16,6 @@ export const Likes: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        {/*<IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Likes</IonTitle>
-          </IonToolbar>
-        </IonHeader>*/}
       </IonContent>
     </IonPage>
   );

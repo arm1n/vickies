@@ -1,11 +1,11 @@
-export type RemainingTime = {
+export type TimeDifference = {
 	days: number;
 	hours: number;
 	minutes: number;
 	seconds: number;
 };
 
-export const calculateRemainingTime = (endDate: string): RemainingTime | false => {
+export const calculateTimeDifference = (endDate: string): TimeDifference | false => {
 	const end = new Date(endDate).getTime();
 	const now = new Date().getTime();
 	const timeLeft = end - now;

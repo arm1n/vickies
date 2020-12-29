@@ -1,1 +1,1 @@
-export const KEY_IDEA = 'my-idea';
+export const KEY_ITEM = 'my-idea';

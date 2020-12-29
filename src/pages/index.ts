@@ -5,3 +5,4 @@ export { Add } from "./add";
 export { Edit } from "./edit";
 export { Likes } from "./likes";
 export { Ideas } from "./ideas";
+export { Idea } from "./idea";

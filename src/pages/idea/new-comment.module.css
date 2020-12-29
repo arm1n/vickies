@@ -1,0 +1,23 @@
+.wrapper {
+	margin: -1rem 0 0;
+}
+
+.label {
+	margin: 0 0 0.5rem;
+}
+
+.input {
+	margin: 0 0 0.5rem;
+	padding: 0 0.5rem;
+	border-radius: 1rem;
+	background: var(--ion-color-light);
+}
+
+.actions {
+
+	display: flex;
+}
+
+.submit {
+	flex: 1;
+}
