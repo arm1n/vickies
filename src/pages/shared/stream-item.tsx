@@ -1,5 +1,4 @@
 import React, { FC, useState, useMemo, useCallback } from "react";
-import { useHistory } from "react-router-dom";
 import {
 	IonList,
 	IonItem,
@@ -25,11 +24,14 @@ import styles from "./stream-item.module.css";
 type StreamItemProps = StoreItem & {
 	showText?: boolean;
 	showActions?: boolean;
+	customAvatar?: string;
+	actions?: string[];
+	onClick?: (storeItem: StoreItem) => void;
 };
 
-export const StreamItem: FC<StreamItemProps> = (item) => {
+export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 	const {
-		id,
+		// id,
 		avatar,
 		user,
 		title,
@@ -41,9 +43,11 @@ export const StreamItem: FC<StreamItemProps> = (item) => {
 		isAnonymous,
 		showText = false,
 		showActions = true,
-	} = item;
+		customAvatar = null,
+		actions = ["Report", "Hide"],
+		onClick = () => {},
+	} = storeItem;
 
-	const history = useHistory();
 	const [showTags, setShowTags] = useState(() => text.length < 125);
 	const [popoverEvent, setPopoverEvent] = useState<MouseEvent | undefined>(
 		undefined
@@ -71,17 +75,19 @@ export const StreamItem: FC<StreamItemProps> = (item) => {
 	]);
 	const avatarUrl = useMemo(
 		() =>
-			isAnonymous
+			customAvatar
+				? customAvatar
+				: isAnonymous
 				? "https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
 				: avatar,
-		[isAnonymous, avatar]
+		[customAvatar, isAnonymous, avatar]
 	);
 
 	const clickHandler = useCallback(
 		(event) => {
-			history.push(`/idea/${id}`);
+			onClick(storeItem);
 		},
-		[history, id]
+		[onClick, storeItem]
 	);
 
 	const showPopoverHandler = useCallback((event) => {
@@ -89,6 +95,7 @@ export const StreamItem: FC<StreamItemProps> = (item) => {
 		event.stopPropagation();
 		setPopoverEvent(event.nativeEvent);
 	}, []);
+
 	const hidePopoverHandler = useCallback((event) => {
 		event.stopPropagation();
 		setPopoverEvent(undefined);
@@ -103,7 +110,7 @@ export const StreamItem: FC<StreamItemProps> = (item) => {
 		event.stopPropagation();
 	}, []);
 
-	return isPublished ? (
+	return (
 		<div className={styles.wrapper} onClick={clickHandler}>
 			<div className={styles.profile}>
 				<IonAvatar className={styles.avatar}>
@@ -127,12 +134,18 @@ export const StreamItem: FC<StreamItemProps> = (item) => {
 								<span className={styles.postedby}>
 									by {userName}
 								</span>
-								<span> </span>
-								<span className={styles.postedat}>
-									<Text color="main" size="sm" bold={true}>
-										- <TimeDifference date={deadline} />
-									</Text>
-								</span>
+								{isPublished && (
+									<span className={styles.postedat}>
+										{" "}
+										<Text
+											size="sm"
+											bold={true}
+											color="main"
+										>
+											- <TimeDifference date={deadline} />
+										</Text>
+									</span>
+								)}
 							</Text>
 						</div>
 					</div>
@@ -147,16 +160,20 @@ export const StreamItem: FC<StreamItemProps> = (item) => {
 								<IonListHeader>
 									<IonLabel>Actions</IonLabel>
 								</IonListHeader>
-								<IonItem button={true} onClick={dummyHandler}>
-									Report
-								</IonItem>
-								<IonItem
-									button={true}
-									onClick={dummyHandler}
-									lines="none"
-								>
-									Hide idea
-								</IonItem>
+								{actions.map((action, index) => (
+									<IonItem
+										key={index}
+										lines={
+											index < actions.length - 1
+												? "inset"
+												: "none"
+										}
+										button={true}
+										onClick={dummyHandler}
+									>
+										{action}
+									</IonItem>
+								))}
 							</IonList>
 						</IonPopover>
 						<IonButton
@@ -221,7 +238,7 @@ export const StreamItem: FC<StreamItemProps> = (item) => {
 
 				{showActions && (
 					<ActionButtons
-						storeItem={item}
+						storeItem={storeItem}
 						onClickLike={dummyHandler}
 						onClickDislike={dummyHandler}
 						onClickComment={dummyHandler}
@@ -231,5 +248,5 @@ export const StreamItem: FC<StreamItemProps> = (item) => {
 				)}
 			</div>
 		</div>
-	) : null;
+	);
 };

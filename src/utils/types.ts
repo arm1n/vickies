@@ -22,8 +22,8 @@ export type CommentItem = {
 	user: string;
 	avatar: string;
 	text: string;
-	likes: number;
-	dislikes: number;
+	likes?: number;
+	dislikes?: number;
 	date: string;
 }
 
@@ -31,8 +31,8 @@ export type StoreItem = Idea & {
 	id: string;
 	user: string;
 	avatar: string;
-	likes: number;
-	dislikes: number;
-	comments: number;
+	likes?: number;
+	dislikes?: number;
+	comments?: number;
 	commentItems: CommentItem[];
 };

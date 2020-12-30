@@ -1,7 +1,7 @@
 import { StoreItem } from "utils";
 
 import profile_anna_miller from "images/profiles/profile-anna-miller.jpg";
-import profile_hansjoerg_rogen from "images/profiles/profile-hansjoerg-rogen.jpg";
+// import profile_hansjoerg_rogen from "images/profiles/profile-hansjoerg-rogen.jpg";
 import profile_isabella_moore from "images/profiles/profile-isabella-moore.jpg";
 import profile_jack_walker from "images/profiles/profile-jack-walker.jpg";
 import profile_kent_clark from "images/profiles/profile-kent-clark.jpg";
@@ -109,7 +109,6 @@ export const STORE: StoreItem[] = [
 				avatar: profile_anna_miller,
 				text: `I really like that idea - something the world absolutely needs!`,
 				likes: 4,
-				dislikes: 0,
 				date: getRandomCommentDate(),
 			},
 			{
@@ -127,7 +126,6 @@ export const STORE: StoreItem[] = [
 				avatar: profile_kent_clark,
 				text: `Needs probably some pimping, but I like the basic thinking.`,
 				likes: 3,
-				dislikes: 0,
 				date: getRandomCommentDate(),
 			},
 		],

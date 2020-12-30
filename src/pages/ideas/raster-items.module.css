@@ -1,0 +1,26 @@
+.wrapper {
+	display: grid;
+	grid-gap: 1rem;
+	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.item:nth-child(3n + 1) .image {
+	background: var(--ion-color-primary);
+}
+
+.item:nth-child(3n + 2) .image {
+	background: var(--ion-color-secondary);
+}
+
+.item:nth-child(3n + 3) .image {
+	background: var(--ion-color-tertiary);
+}
+
+.img,
+.image {
+	border-radius: 1rem;
+}
+
+.img {
+	display: block;
+}

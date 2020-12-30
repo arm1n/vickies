@@ -1,11 +1,16 @@
 import React, { FC } from "react";
 
 import { STORE } from "data";
+import { StoreItem } from "utils";
 import { Section } from "components";
 
 import { StreamItem } from "../shared/stream-item";
 
-const COMPANY_STORE_ITEMS = STORE.filter(({ sharingValue }) => {
+const COMPANY_STORE_ITEMS = STORE.filter(({ isPublished, sharingValue }) => {
+	if (!isPublished) {
+		return false;
+	}
+
 	switch (sharingValue) {
 		case "team":
 		case "company":
@@ -16,16 +21,18 @@ const COMPANY_STORE_ITEMS = STORE.filter(({ sharingValue }) => {
 	}
 });
 
-const MAX_INDEX = COMPANY_STORE_ITEMS.length - 1;
+type CompanyStreamProps = {
+	onClick: (storeItem: StoreItem) => void;
+};
 
-export const CompanyStream: FC = ({ children }) => (
+export const CompanyStream: FC<CompanyStreamProps> = ({
+	children,
+	onClick = () => {},
+}) => (
 	<Section>
 		{children}
 		{COMPANY_STORE_ITEMS.map((storeItem, index) => (
-			<div key={storeItem.id}>
-				<StreamItem key={storeItem.id} {...storeItem} />
-				{index < MAX_INDEX && <hr />}
-			</div>
+			<StreamItem key={storeItem.id} onClick={onClick} {...storeItem} />
 		))}
 	</Section>
 );

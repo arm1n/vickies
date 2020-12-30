@@ -1,6 +1,7 @@
-import React, { FC } from "react";
+import React, { FC, Fragment } from "react";
 import { Link } from "react-router-dom";
 
+import { IDEAS } from "data";
 import { Text } from "components";
 import { StoreItem, KEY_ITEM, getItem } from "utils";
 
@@ -10,38 +11,33 @@ const TRUNCATE = 18;
 
 export const MyIdeas: FC = () => {
 	const storeItem = getItem<StoreItem>(KEY_ITEM);
+	const storeItems =
+		storeItem !== null ? [...[storeItem], ...IDEAS] : [...IDEAS];
 
 	return (
 		<div className={styles.wrapper}>
-			{storeItem && (
-				<Link to={`edit/${KEY_ITEM}`} className={styles.item}>
-					<Text color="dark" type="special" size="sm" truncate={TRUNCATE}>
+			{storeItems.slice(0, 4).map((storeItem) => {
+				const content = (
+					<Text
+						color="dark"
+						type="special"
+						size="sm"
+						truncate={TRUNCATE}
+					>
 						{storeItem.title}
 					</Text>
-				</Link>
-			)}
-			<div className={styles.item}>
-				<Text type="special" size="sm" truncate={TRUNCATE}>
-					Nutella Ice Cream
-				</Text>
-			</div>
-			<div className={styles.item}>
-				<Text type="special" size="sm" truncate={TRUNCATE}>
-					iBeacon for queen bee
-				</Text>
-			</div>
-			<div className={styles.item}>
-				<Text type="special" size="sm" truncate={TRUNCATE}>
-					Journal budget
-				</Text>
-			</div>
-			{!storeItem && (
-				<div className={styles.item}>
-					<Text type="special" size="sm" truncate={TRUNCATE}>
-						seamless parking for clients
-					</Text>
-				</div>
-			)}
+				);
+
+				return (
+					<div className={styles.item} key={storeItem.id}>
+						{storeItem.id === KEY_ITEM ? (
+							<Link to={`edit/${KEY_ITEM}`}>{content}</Link>
+						) : (
+							<Fragment>{content}</Fragment>
+						)}
+					</div>
+				);
+			})}
 		</div>
 	);
 };

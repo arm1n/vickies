@@ -13,12 +13,12 @@ import { Container, Text } from "components";
 
 import styles from "./new-comment.module.css";
 
-type FormProps = {
+type NewCommentProps = {
 	storeItem: StoreItem;
 	onSubmit: (newComment: CommentItem) => void;
 };
 
-export const NewComment: FC<FormProps> = ({ storeItem, onSubmit }) => {
+export const NewComment: FC<NewCommentProps> = ({ storeItem, onSubmit }) => {
 	const [text, setText] = useState<string>("");
 
 	const changeHandler = useCallback((event) => {

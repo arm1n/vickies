@@ -33,7 +33,7 @@ export const Meta: FC<MetaProps> = ({ storeItem }) => {
 			<IonItem lines="none">
 				<IonLabel>
 					<Text bold={true}>{storeItem.likes}</Text>{" "}
-					<Text>likes</Text> &bull;{" "}
+					<Text>likes</Text>{" "}&bull;{" "}
 					<Text bold={true}>{storeItem.dislikes}</Text>{" "}
 					<Text>dislikes</Text>
 				</IonLabel>

@@ -1,5 +1,6 @@
-import React, { FC, Fragment, useState, useCallback, useMemo } from "react";
+import React, { FC, useState, useCallback, useMemo } from "react";
 import { IonLabel, IonBadge, IonSegment, IonSegmentButton } from "@ionic/react";
+import { useHistory } from "react-router-dom";
 
 import { StoreItem, KEY_ITEM, getItem } from "utils";
 import { Section, Text } from "components";
@@ -19,6 +20,7 @@ enum SEGMENT {
 export const MyStream: FC = () => {
 	const [activeSegment, setActiveSegment] = useState<SEGMENT>(SEGMENT.PUBLIC);
 	const [showBadge, setShowBadge] = useState(true);
+	const history = useHistory();
 
 	const changeHandler = useCallback(({ detail: { value } }) => {
 		if (value === SEGMENT.COMPANY) {
@@ -28,28 +30,27 @@ export const MyStream: FC = () => {
 		setActiveSegment(value);
 	}, []);
 
+	const clickHandler = useCallback(
+		(storeItem: StoreItem) => {
+			history.push(`/idea/${storeItem.id}`);
+		},
+		[history]
+	);
+
 	const storeItem = getItem<StoreItem>(KEY_ITEM);
-
 	const [publicItem, companyItem] = useMemo(() => {
-		if (storeItem === null) {
-			return [];
+		if (storeItem === null || !storeItem.isPublished) {
+			return [null, null];
 		}
-
-		const item = (
-			<Fragment>
-				<StreamItem {...storeItem} />
-				<hr />
-			</Fragment>
-		);
 
 		switch (storeItem.sharingValue) {
 			case "world":
 			case "followers":
-				return [item, null];
+				return [<StreamItem onClick={clickHandler} {...storeItem} />, null];
 			default:
-				return [null, item];
+				return [null, <StreamItem onClick={clickHandler} {...storeItem} />];
 		}
-	}, [storeItem]);
+	}, [clickHandler, storeItem]);
 
 	return (
 		<div className={styles.wrapper}>
@@ -91,10 +92,10 @@ export const MyStream: FC = () => {
 			</Section>
 			<Section>
 				{activeSegment === SEGMENT.PUBLIC && (
-					<PublicStream>{publicItem}</PublicStream>
+					<PublicStream onClick={clickHandler}>{publicItem}</PublicStream>
 				)}
 				{activeSegment === SEGMENT.COMPANY && (
-					<CompanyStream>{companyItem}</CompanyStream>
+					<CompanyStream onClick={clickHandler}>{companyItem}</CompanyStream>
 				)}
 			</Section>
 		</div>

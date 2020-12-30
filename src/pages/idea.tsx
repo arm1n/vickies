@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import {
   IonContent,

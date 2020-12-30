@@ -1,5 +1,26 @@
 .wrapper {
 	display: flex;
+	margin-bottom: 1rem;
+	padding-bottom: 1rem;
+	border-bottom: 1px solid var(--ion-color-dark);
+}
+
+.wrapper:last-child {
+	border-bottom: 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+
+.wrapper:nth-child(3n + 1) .avatar {
+	background: var(--ion-color-primary);
+}
+
+.wrapper:nth-child(3n + 2) .avatar {
+	background: var(--ion-color-secondary);
+}
+
+.wrapper:nth-child(3n + 3) .avatar {
+	background: var(--ion-color-tertiary);
 }
 
 .profile {

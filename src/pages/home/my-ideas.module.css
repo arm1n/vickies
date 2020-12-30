@@ -12,6 +12,7 @@
 	padding: 0.25rem;
 	text-align: center;
 	align-items: center;
+	text-decoration: none;
 	justify-content: center;
 	border-radius: var(--border-radius);
 }
@@ -23,18 +24,14 @@
   display: inline-block;
 }
 
-.item:nth-child(1) {
+.item:nth-child(3n + 1) {
 	background: var(--ion-color-primary);
 }
 
-.item:nth-child(2) {
+.item:nth-child(3n + 2) {
 	background: var(--ion-color-secondary);
 }
 
-.item:nth-child(3) {
+.item:nth-child(3n + 3) {
 	background: var(--ion-color-tertiary);
-}
-
-.item:nth-child(4) {
-	background: var(--ion-color-primary);
 }

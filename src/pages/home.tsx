@@ -44,11 +44,6 @@ export const Home: FC = () => (
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
-        {/*<IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Home</IonTitle>
-          </IonToolbar>
-        </IonHeader>*/}
         <Container>
           <Section>
             <div className={styles.myideas}>

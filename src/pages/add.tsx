@@ -19,6 +19,8 @@ import profile_hansjoerg_rogen from "images/profiles/profile-hansjoerg-rogen.jpg
 
 import { Form } from "./add/form";
 
+import styles from "./add.module.css";
+
 export const Add: React.FC = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
@@ -46,10 +48,7 @@ export const Add: React.FC = () => {
       isAnonymous: false,
       isPublished: false,
       publishedDate: "",
-      likes: 0,
-      dislikes: 0,
-      comments: 0,
-      commentItems: []
+      commentItems: [],
     };
     setItem<StoreItem>(KEY_ITEM, data);
     setShowLoading(true);
@@ -70,7 +69,9 @@ export const Add: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonBackButton color="main" text={""} defaultHref="/home" />
+            <div className={styles.hidden}>
+              <IonBackButton color="main" text={""} defaultHref="/home" />
+            </div>
           </IonButtons>
           <IonButtons slot="end">
             <IonButton

@@ -40,6 +40,11 @@ export const ActionButtons: FC<ActionButtonsProps> = ({
 		}
 	}, [storeItem.sharingValue]);
 
+	const showMessageButton = useMemo(
+		() => storeItem.user !== "Hansjörg Rogen",
+		[storeItem.user]
+	);
+
 	const likeHandler = useCallback(
 		(event) => {
 			onClickLike(event);
@@ -103,15 +108,17 @@ export const ActionButtons: FC<ActionButtonsProps> = ({
 				<IonIcon slot="start" size="small" src={commentIcon} />
 				{showNumbers && <IonLabel>{storeItem.comments}</IonLabel>}
 			</IonButton>
-			<IonButton
-				color="dark"
-				fill="clear"
-				size="small"
-				onClick={messageHandler}
-				className={styles.button}
-			>
-				<IonIcon slot="icon-only" size="small" src={messageIcon} />
-			</IonButton>
+			{showMessageButton && (
+				<IonButton
+					color="dark"
+					fill="clear"
+					size="small"
+					onClick={messageHandler}
+					className={styles.button}
+				>
+					<IonIcon slot="icon-only" size="small" src={messageIcon} />
+				</IonButton>
+			)}
 			{showShareButton && (
 				<IonButton
 					color="dark"
