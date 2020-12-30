@@ -4,23 +4,28 @@
 	grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 }
 
-.item:nth-child(3n + 1) .image {
+.item {
+	display: flex;
+	flex-direction: column;
+}
+
+.item:nth-child(3n + 1) .img {
 	background: var(--ion-color-primary);
 }
 
-.item:nth-child(3n + 2) .image {
+.item:nth-child(3n + 2) .img {
 	background: var(--ion-color-secondary);
 }
 
-.item:nth-child(3n + 3) .image {
+.item:nth-child(3n + 3) .img {
 	background: var(--ion-color-tertiary);
 }
 
-.img,
 .image {
-	border-radius: 1rem;
+	flex: 1;
 }
 
 .img {
 	display: block;
+	border-radius: 1rem;
 }
