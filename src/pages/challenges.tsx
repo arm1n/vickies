@@ -9,10 +9,10 @@ import {
 
 import { Container, Text } from "components";
 
-import { MyStream } from "./ideas/my-stream";
+import { MyStream } from "./challenges/my-stream";
 import { MyProfile } from "./shared/my-profile";
 
-export const Ideas: React.FC = () => {
+export const Challenges: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
@@ -20,7 +20,7 @@ export const Ideas: React.FC = () => {
           <IonTitle>
             <div className="ion-text-center">
               <Text color="main" size="md" bold={true}>
-                my ideas
+                my challenges
               </Text>
             </div>
           </IonTitle>

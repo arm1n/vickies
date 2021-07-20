@@ -16,7 +16,7 @@ import { ellipsisHorizontal } from "ionicons/icons";
 import { StoreItem } from "utils";
 import { Text, Title } from "components";
 
-import { ActionButtons } from "./action-buttons";
+import { ActionButtonsChallengeDefault } from "./action-buttons-challenge-default";
 import { TimeDifference } from "./time-difference";
 
 import styles from "./stream-item.module.css";
@@ -237,13 +237,9 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 				)}
 
 				{showActions && (
-					<ActionButtons
+					<ActionButtonsChallengeDefault
 						storeItem={storeItem}
-						onClickLike={dummyHandler}
-						onClickDislike={dummyHandler}
-						onClickComment={dummyHandler}
-						onClickMessage={dummyHandler}
-						onClickShare={dummyHandler}
+						onClickButton={dummyHandler}
 					/>
 				)}
 			</div>

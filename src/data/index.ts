@@ -1,3 +1,3 @@
 export * from "./store";
-export * from "./ideas";
+export * from "./challenges";
 export * from "./likes";

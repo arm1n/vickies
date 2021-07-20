@@ -1,0 +1,19 @@
+.comment {
+	--padding-start: 0;
+	align-items: flex-start;
+}
+
+.label {
+	margin: 0;
+}
+
+.text {
+	margin: 0.5rem 0 0;
+}
+
+.empty {
+	padding-bottom: 1rem;
+	margin-bottom: 1rem;
+	border-bottom: 1px solid var(--ion-color-dark);
+}
+

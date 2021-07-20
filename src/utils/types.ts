@@ -5,19 +5,7 @@ export type SharingValue =
 	| "team"
 	| "followers";
 
-export type Idea = {
-	title: string;
-	text: string;
-	tags: string[];
-	images: string[];
-	deadline: string;
-	isAnonymous: boolean;
-	sharingValue: SharingValue;
-	isPublished: boolean;
-	publishedDate: string;
-};
-
-export type CommentItem = {
+export type Comment = {
 	id: string;
 	user: string;
 	avatar: string;
@@ -25,14 +13,44 @@ export type CommentItem = {
 	likes?: number;
 	dislikes?: number;
 	date: string;
-}
+};
 
-export type StoreItem = Idea & {
+export type Idea = {
+	id: string;
+	user: string;
+	avatar: string;
+	title: string;
+	text: string;
+	likes?: number;
+	dislikes?: number;
+	image?: string;
+	date: string;
+	commentsCount?: number;
+	comments: Comment[];
+};
+
+export type Challenge = {
+	title: string;
+	text: string;
+	tags: string[];
+	reward: number;
+	images: string[];
+	deadline: string;
+	isAnonymous: boolean;
+	sharingValue: SharingValue;
+	isPublished: boolean;
+	publishedDate: string;
+	announcementDate: string;
+};
+
+export type StoreItem = Challenge & {
 	id: string;
 	user: string;
 	avatar: string;
 	likes?: number;
 	dislikes?: number;
-	comments?: number;
-	commentItems: CommentItem[];
+	views?: number;
+
+	ideasCount?: number;
+	ideas: Idea[];
 };

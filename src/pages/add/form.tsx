@@ -136,14 +136,14 @@ export const Form: FC<FormProps> = ({
 							value={title}
 							autofocus={true}
 							onIonChange={handleTitle}
-							placeholder="Title of your vickie"
+							placeholder="Title of your challenge"
 						/>
 					</div>
 					<div className={styles.text}>
 						<IonTextarea
 							value={text}
 							ref={textareaRef}
-							placeholder="Write down your idea"
+							placeholder="Describe your challenge"
 						/>
 					</div>
 

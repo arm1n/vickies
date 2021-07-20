@@ -1,7 +1,7 @@
 import React, { FC, useState, useCallback } from "react";
 import { IonSegment, IonSegmentButton, IonIcon } from "@ionic/react";
 
-import { IDEAS } from "data";
+import { CHALLENGES } from "data";
 import { Section } from "components";
 import { KEY_ITEM, getItem, StoreItem } from "utils";
 
@@ -26,7 +26,7 @@ export const MyStream: FC = () => {
 
 	const storeItem = getItem<StoreItem>(KEY_ITEM);
 	const storeItems =
-		storeItem !== null ? [...[storeItem], ...IDEAS] : [...IDEAS];
+		storeItem !== null ? [...[storeItem], ...CHALLENGES] : [...CHALLENGES];
 
 	return (
 		<div className={styles.wrapper}>

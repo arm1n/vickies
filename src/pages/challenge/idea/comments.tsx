@@ -11,20 +11,20 @@ import {
 } from "@ionic/react";
 import { ellipsisHorizontal } from "ionicons/icons";
 
-import { Container, Text } from "components";
-import { StoreItem, CommentItem } from "utils";
+import { Text } from "components";
+import { Idea, Comment } from "utils";
 
-import { TimeDifference } from "../shared/time-difference";
+import { TimeDifference } from "../../shared/time-difference";
 
 import styles from "./comments.module.css";
 
 type CommentsProps = {
-	storeItem: StoreItem;
+	idea: Idea;
 };
 
-export const Comments: FC<CommentsProps> = ({ storeItem }) => {
+export const Comments: FC<CommentsProps> = ({ idea }) => {
 	const sortedComments = useMemo(() => {
-		const sortedComments = [...storeItem.commentItems];
+		const sortedComments = [...idea.comments];
 
 		sortedComments.sort(
 			({ date: dateA }, { date: dateB }) =>
@@ -32,17 +32,14 @@ export const Comments: FC<CommentsProps> = ({ storeItem }) => {
 		);
 
 		return sortedComments;
-	}, [storeItem.commentItems]);
+	}, [idea.comments]);
 
 	return sortedComments.length > 0 ? (
 		<Fragment>
-			{sortedComments.map((commentItem, index) => {
+			{sortedComments.map((comment, index) => {
 				return (
 					<div key={index}>
-						<Comment
-							storeItem={storeItem}
-							commentItem={commentItem}
-						/>
+						<CommentsItem idea={idea} comment={comment} />
 						<hr />
 					</div>
 				);
@@ -50,17 +47,17 @@ export const Comments: FC<CommentsProps> = ({ storeItem }) => {
 		</Fragment>
 	) : (
 		<div className={styles.empty}>
-			<Container><Text>No comments yet - be the first one!</Text></Container>
+			<Text>No comments yet - be the first one!</Text>
 		</div>
 	);
 };
 
 type CommentProps = {
-	storeItem: StoreItem;
-	commentItem: CommentItem;
+	idea: Idea;
+	comment: Comment;
 };
 
-const Comment: FC<CommentProps> = ({ storeItem, commentItem }) => {
+const CommentsItem: FC<CommentProps> = ({ idea, comment }) => {
 	const [popoverEvent, setPopoverEvent] = useState<MouseEvent | undefined>(
 		undefined
 	);
@@ -79,23 +76,23 @@ const Comment: FC<CommentProps> = ({ storeItem, commentItem }) => {
 	return (
 		<IonItem lines="none" className={styles.comment}>
 			<IonAvatar slot="start" className={styles.avatar}>
-				<img src={commentItem.avatar} alt={commentItem.user} />
+				<img src={comment.avatar} alt={comment.user} />
 			</IonAvatar>
 			<IonLabel className={styles.label}>
 				<div>
-					<Text bold={true}>{commentItem.user}</Text>{" "}
+					<Text bold={true}>{comment.user}</Text>{" "}
 					<Text size="sm">
 						<TimeDifference
-							date={commentItem.date}
+							date={comment.date}
 							fallback="just now"
 						/>
 					</Text>
 				</div>
 				<div>
-					<Text size="sm">answer to {storeItem.user}</Text>
+					<Text size="sm">answer to {idea.user}</Text>
 				</div>
 				<div className={`${styles.text} ion-text-wrap`}>
-					{commentItem.text}
+					{comment.text}
 				</div>
 			</IonLabel>
 			<div slot="end">

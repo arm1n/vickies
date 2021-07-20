@@ -8,17 +8,17 @@ import movieIcon from "icons/movie.svg";
 import audioIcon from "icons/audio.svg";
 import copyIcon from "icons/copy.svg";
 
-import { StoreItem, CommentItem } from "utils";
-import { Container, Text } from "components";
+import { Idea, Comment } from "utils";
+import { Text } from "components";
 
 import styles from "./new-comment.module.css";
 
 type NewCommentProps = {
-	storeItem: StoreItem;
-	onSubmit: (newComment: CommentItem) => void;
+	idea: Idea;
+	onSubmit: (idea: Idea, comment: Comment) => void;
 };
 
-export const NewComment: FC<NewCommentProps> = ({ storeItem, onSubmit }) => {
+export const NewComment: FC<NewCommentProps> = ({ idea, onSubmit }) => {
 	const [text, setText] = useState<string>("");
 
 	const changeHandler = useCallback((event) => {
@@ -27,7 +27,7 @@ export const NewComment: FC<NewCommentProps> = ({ storeItem, onSubmit }) => {
 
 	const submitHandler = useCallback(
 		(event) => {
-			onSubmit({
+			onSubmit(idea, {
 				id: `comment-${Math.random().toString(36)}`,
 				user: "Hansjörg Rogen",
 				avatar: profile_hansjoerg_rogen,
@@ -38,19 +38,19 @@ export const NewComment: FC<NewCommentProps> = ({ storeItem, onSubmit }) => {
 			});
 			setText("");
 		},
-		[onSubmit, text]
+		[onSubmit, idea, text]
 	);
 
 	return (
 		<div className={styles.wrapper}>
-			<Container>
+
 				<div className={styles.label}>
-					<Text size="sm">Comment to {storeItem.user}</Text>
+					<Text size="sm">Comment to {idea.user}</Text>
 				</div>
 				<div className={styles.input}>
 					<IonInput
 						value={text}
-						autofocus={true}
+						autofocus={false}
 						onIonChange={changeHandler}
 						placeholder="Write your comment"
 					/>
@@ -99,7 +99,7 @@ export const NewComment: FC<NewCommentProps> = ({ storeItem, onSubmit }) => {
 						</IonButton>
 					</div>
 				</div>
-			</Container>
+
 		</div>
 	);
 };

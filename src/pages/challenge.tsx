@@ -12,18 +12,18 @@ import {
 
 import { STORE } from "data";
 import { Container, Text } from "components";
-import { KEY_ITEM, StoreItem, getItem } from "utils";
+import { KEY_ITEM, StoreItem, Idea, Comment, getItem } from "utils";
 
 import { StreamItem } from "./shared/stream-item";
-import { ActionButtons } from "./shared/action-buttons";
+import { ActionButtonsChallengeDefault } from "./shared/action-buttons-challenge-default";
 
-import { Meta } from "./idea/meta";
-import { Comments } from "./idea/comments";
-import { NewComment } from "./idea/new-comment";
+import { ActionButtonsChallengeExtended } from "./challenge/action-buttons-challenge-extended";
+import { ButtonsToolbar } from "./challenge/buttons-toolbar";
+import { Ideas } from "./challenge/ideas";
 
-import styles from "./idea.module.css";
+import styles from "./challenge.module.css";
 
-export const Idea: React.FC = () => {
+export const Challenge: React.FC = () => {
   const { id } = useParams();
 
   const [storeItem, setStoreItem] = useState<StoreItem | null>(() => {
@@ -35,16 +35,30 @@ export const Idea: React.FC = () => {
     }
   });
 
-  const newCommentHandler = useCallback((newComment) => {
+  const newCommentHandler = useCallback((idea: Idea, newComment: Comment) => {
     setStoreItem((currentStoreItem) => {
       if (currentStoreItem === null) {
         return null;
       }
 
+      const newIdeas = currentStoreItem.ideas.map((current) => {
+        if (idea.id !== current.id) {
+          return idea;
+        }
+
+        return {
+          ...idea,
+          ...{
+            commentsCount: (idea.commentsCount || 0) + 1,
+            comments: [...idea.comments, ...[newComment]],
+          },
+        };
+      });
+
       return {
         ...currentStoreItem,
         ...{
-          commentItems: [...currentStoreItem.commentItems, ...[newComment]],
+          ideas: newIdeas,
         },
       };
     });
@@ -78,13 +92,14 @@ export const Idea: React.FC = () => {
       <IonContent fullscreen>
         <Container>
           <StreamItem {...storeItem} showText={true} showActions={false} />
-          <Meta storeItem={storeItem} />
+          <ActionButtonsChallengeDefault storeItem={storeItem} />
           <hr />
-          <ActionButtons storeItem={storeItem} showNumbers={false} />
+          <ActionButtonsChallengeExtended storeItem={storeItem} />
           <hr />
+          <ButtonsToolbar storeItem={storeItem} />
+          <hr />
+          <Ideas storeItem={storeItem} onAddNewComment={newCommentHandler} />
         </Container>
-        <Comments storeItem={storeItem} />
-        <NewComment storeItem={storeItem} onSubmit={newCommentHandler} />
       </IonContent>
     </IonPage>
   );

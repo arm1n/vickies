@@ -32,23 +32,23 @@ export const MyStream: FC = () => {
 
 	const clickHandler = useCallback(
 		(storeItem: StoreItem) => {
-			history.push(`/idea/${storeItem.id}`);
+			history.push(`/challenges/${storeItem.id}`);
 		},
 		[history]
 	);
 
 	const storeItem = getItem<StoreItem>(KEY_ITEM);
 	const [publicItem, companyItem] = useMemo(() => {
-		if (storeItem === null || !storeItem.isPublished) {
+		if (storeItem === null || !storeItem.isPublished) {
 			return [null, null];
 		}
 
 		switch (storeItem.sharingValue) {
 			case "world":
 			case "followers":
-				return [<StreamItem onClick={clickHandler} {...storeItem} />, null];
+				return [<StreamItem onClick={clickHandler} {...storeItem} />, null];
 			default:
-				return [null, <StreamItem onClick={clickHandler} {...storeItem} />];
+				return [null, <StreamItem onClick={clickHandler} {...storeItem} />];
 		}
 	}, [clickHandler, storeItem]);
 

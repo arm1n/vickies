@@ -12,50 +12,35 @@ import profile_olivia_lopez from "images/profiles/profile-olivia-lopez.jpg";
 import profile_philipp_schwab from "images/profiles/profile-philipp-schwab.jpg";
 import profile_sophia_williams from "images/profiles/profile-sophia-williams.jpg";
 
-import idea1_1 from "images/ideas/idea1-1.jpg";
-import idea1_2 from "images/ideas/idea1-2.jpg";
-import idea1_3 from "images/ideas/idea1-3.jpg";
+import challenge1_image from "images/challenges/challenge1-image.jpg";
+import challenge1_idea1 from "images/challenges/challenge1-idea1.jpg";
+import challenge1_idea2 from "images/challenges/challenge1-idea2.jpg";
+import challenge1_idea3 from "images/challenges/challenge1-idea3.jpg";
+import challenge1_idea4 from "images/challenges/challenge1-idea4.jpg";
+import challenge1_idea5 from "images/challenges/challenge1-idea5.jpg";
 
-import idea2_1 from "images/ideas/idea2-1.jpg";
-import idea2_2 from "images/ideas/idea2-2.jpg";
-import idea2_3 from "images/ideas/idea2-3.jpg";
+import challenge2_image from "images/challenges/challenge2-image.jpg";
+import challenge2_idea1 from "images/challenges/challenge2-idea1.jpg";
+import challenge2_idea2 from "images/challenges/challenge2-idea2.jpg";
 
-import idea3_1 from "images/ideas/idea3-1.jpg";
-import idea3_2 from "images/ideas/idea3-2.jpg";
-import idea3_3 from "images/ideas/idea3-3.jpg";
-
-import idea4_1 from "images/ideas/idea4-1.jpg";
-import idea4_2 from "images/ideas/idea4-2.jpg";
-import idea4_3 from "images/ideas/idea4-3.jpg";
-
-import idea5_1 from "images/ideas/idea5-1.jpg";
-import idea5_2 from "images/ideas/idea5-2.jpg";
-import idea5_3 from "images/ideas/idea5-3.jpg";
-
-import idea6_1 from "images/ideas/idea6-1.jpg";
-import idea6_2 from "images/ideas/idea6-2.jpg";
-import idea6_3 from "images/ideas/idea6-3.jpg";
-
-import idea7_1 from "images/ideas/idea7-1.jpg";
-import idea7_2 from "images/ideas/idea7-2.jpg";
-import idea7_3 from "images/ideas/idea7-3.jpg";
-
-import idea8_1 from "images/ideas/idea8-1.jpg";
-import idea8_2 from "images/ideas/idea8-2.jpg";
-import idea8_3 from "images/ideas/idea8-3.jpg";
-
-import idea11_1 from "images/ideas/idea11-1.jpg";
-import idea11_2 from "images/ideas/idea11-2.jpg";
-import idea11_3 from "images/ideas/idea11-3.jpg";
-
-import idea12_1 from "images/ideas/idea12-1.jpg";
-import idea12_2 from "images/ideas/idea12-2.jpg";
-import idea12_3 from "images/ideas/idea12-3.jpg";
+import challenge3_image from "images/challenges/challenge3-image.jpg";
+import challenge3_idea1 from "images/challenges/challenge3-idea1.jpg";
+import challenge3_idea2 from "images/challenges/challenge3-idea2.jpg";
 
 const getRandomDate = (min: Date, max: Date) => {
 	return new Date(
 		min.getTime() + Math.random() * (max.getTime() - min.getTime())
 	).toISOString();
+};
+
+const getRandomAnnouncementDate = () => {
+	const min = new Date();
+	min.setHours(min.getHours() + 72);
+
+	const max = new Date();
+	max.setHours(max.getHours() + 144);
+
+	return getRandomDate(min, max);
 };
 
 const getRandomDeadline = () => {
@@ -78,6 +63,16 @@ const getRandomPublishedDate = () => {
 	return getRandomDate(min, max);
 };
 
+const getRandomIdeaDate = () => {
+	const min = new Date();
+	min.setHours(min.getHours() + 1);
+
+	const max = new Date();
+	max.setHours(max.getHours() + 3);
+
+	return getRandomDate(min, max);
+};
+
 const getRandomCommentDate = () => {
 	const min = new Date();
 	min.setHours(min.getHours() + 1);
@@ -90,7 +85,7 @@ const getRandomCommentDate = () => {
 
 export const STORE: StoreItem[] = [
 	{
-		id: "grillable-guacamole",
+		id: "stop-rural-exodus-in-alpine-valleys",
 		user: "Philipp Schwab",
 		sharingValue: "world",
 		isPublished: true,
@@ -98,53 +93,97 @@ export const STORE: StoreItem[] = [
 		deadline: getRandomDeadline(),
 		publishedDate: getRandomPublishedDate(),
 		avatar: profile_philipp_schwab,
-		title: "Grillable Guacamole",
+		title: "Stop rural exodus in alpine valleys",
+		views: 291,
 		likes: 753,
 		dislikes: 38,
-		comments: 3,
-		commentItems: [
+		ideasCount: 5,
+		reward: 3200,
+		announcementDate: getRandomAnnouncementDate(),
+		ideas: [
 			{
-				id: "comment-1",
+				id: "idea-1",
+				user: "Jack Walker",
+				avatar: profile_jack_walker,
+				title: "High Speed Internet",
+				text: `How about it is possible to have high speed internet in the lastpart of the valley to guarantee that people can work remote at home with a good video quality.`,
+				likes: 938,
+				dislikes: 222,
+				image: challenge1_idea1,
+				date: getRandomIdeaDate(),
+				commentsCount: 1,
+				comments: [
+					{
+						id: "1",
+						user: "Anna Miller",
+						avatar: profile_anna_miller,
+						text:
+							"That would really help, whereas realization might not be that easy!",
+						likes: 48,
+						dislikes: 0,
+						date: getRandomCommentDate(),
+					},
+				],
+			},
+			{
+				id: "idea-2",
 				user: "Anna Miller",
 				avatar: profile_anna_miller,
-				text: `I really like that idea - something the world absolutely needs!`,
-				likes: 4,
-				date: getRandomCommentDate(),
+				title: "Delivery service (local restaurants, ...)",
+				text: `Not only DHL and Amazon should deliver in the last corner on earth, local shops and local infrastructure like (several) reastaurants should deliver within, for example a 10k radius. People would love to have this kind of luxury in rural areas.`,
+				likes: 749,
+				dislikes: 180,
+				image: challenge1_idea2,
+				date: getRandomIdeaDate(),
+				commentsCount: 0,
+				comments: [],
 			},
 			{
-				id: "comment-2",
+				id: "idea-3",
 				user: "Isabella Moore",
 				avatar: profile_isabella_moore,
-				text: `I've seen this one already multiple times.`,
-				likes: 1,
-				dislikes: 1,
-				date: getRandomCommentDate(),
+				title: "Hybrid club meetings (music, fire department, ...)",
+				text: `It is difficult for people to get in contact with locals. In addition people are (often) used to work in the city and live on the country side. In Addition it might be difficult to esablish contacts with club meetings, because people are on the way back home or don´t know how get in contact. How about club meetings offer the possibility to offer hybrid meetings, where people can login online from home?`,
+				likes: 583,
+				dislikes: 139,
+				image: challenge1_idea3,
+				date: getRandomIdeaDate(),
+				commentsCount: 0,
+				comments: [],
 			},
 			{
-				id: "comment-3",
-				user: "Kent Clark",
-				avatar: profile_kent_clark,
-				text: `Needs probably some pimping, but I like the basic thinking.`,
-				likes: 3,
-				date: getRandomCommentDate(),
+				id: "idea-4",
+				user: "Max Smith",
+				avatar: profile_max_smith,
+				title: "Perfect snow removal",
+				text: `In some areas it might be difficult für several days a year to get to work due to the snow conditions. If the local community might guarantee, that the roads are snow-free betwenn 6 and 8 in the morning, it might help.`,
+				likes: 435,
+				dislikes: 89,
+				image: challenge1_idea4,
+				date: getRandomIdeaDate(),
+				commentsCount: 0,
+				comments: [],
+			},
+			{
+				id: "idea-5",
+				user: "Mia Johnson",
+				avatar: profile_mia_johnson,
+				title: "Better public transport",
+				text: `Transport for kids (schools) is quite often good organized. In some regions the public transport doesnt help to support people to get to work in time.`,
+				likes: 201,
+				dislikes: 34,
+				image: challenge1_idea5,
+				date: getRandomIdeaDate(),
+				commentsCount: 0,
+				comments: [],
 			},
 		],
-		text: `Barbecues are amazing. No doubt about that! The selfmade sauces shouldn´t be missed. And Guacamole is the best, no matter what you grill. Imagine the combination of both. How about a grillable Guacamole.
-
-					I have no idea yet, but maybe someone could give me some ideas. Thanks!`,
-		tags: [
-			"grill",
-			"vegetarian",
-			"slowfood",
-			"summerideas",
-			"food",
-			"sustainable",
-			"lessmeat",
-		],
-		images: [idea1_1, idea1_2, idea1_3],
+		text: `I am looking for innovative ideas to stop the rural exodus in alpine valleys. Are there ways to minimize the gap between the advantages of rural areas and cities? Solutions should somehow support the 17 sustainable development goals and local families should benefit as well.`,
+		tags: ["rural", "exodus", "alpine", "valleys", "sustainable"],
+		images: [challenge1_image],
 	},
 	{
-		id: "nas-usb-sticks",
+		id: "save-people-during-hiking-tours",
 		user: "Jack Walker",
 		sharingValue: "world",
 		isPublished: true,
@@ -152,178 +191,48 @@ export const STORE: StoreItem[] = [
 		deadline: getRandomDeadline(),
 		publishedDate: getRandomPublishedDate(),
 		avatar: profile_jack_walker,
-		title: "NAS USB-Sticks",
+		title: "Save people during hiking tours",
+		views: 182,
 		likes: 683,
 		dislikes: 34,
-		comments: 49,
-		commentItems: [],
-		text: `How about that: Although the world has a lot of cloud storage solutions and some people are having NAS Systems in their homes, most people aren´t having their data saved twice for security reasons (breakdown of hardware).
-
-					Over the years most households are having a lot of USB sticks at home. Imagine a USB dongle, where you can put serveral USB sticks together. You can enter this drive via USB port on your router and on your PC. Via different settings all your important data is more safe with small costs. Most households are happy, if they can save some family photos,... and for that, some gigabyte should be enough.`,
-		tags: [
-			"reuse",
-			"moneysafer",
-			"upsycling",
-			"recyling",
-			"security",
-			"datasecurity",
+		ideasCount: 49,
+		reward: 4750,
+		announcementDate: getRandomAnnouncementDate(),
+		ideas: [
+			{
+				id: "idea-1",
+				user: "Olivia Lopez",
+				avatar: profile_olivia_lopez,
+				title: "Emergency tracker for remote areas",
+				text: `Imagine a small cube which you turn on at the beginning of your walking trip and it sendsa strong personalized signal every 1 to 5 minutes. If a helicopter (or drone) would receive the signal. It should have enough power for several days.`,
+				likes: 593,
+				dislikes: 133,
+				image: challenge2_idea1,
+				date: getRandomIdeaDate(),
+				commentsCount: 0,
+				comments: [],
+			},
+			{
+				id: "idea-2",
+				user: "Manuel Wilson",
+				avatar: profile_manuel_wilson,
+				title: "Tracking app",
+				text: `Imagine an app whhere you enter your walking tour and it sends every minute a ping from your last location with GSM singal. It might help to find you more easily. In addition it might inform a contact person, if you don´t get to a predefined location with known GSM singal in time.`,
+				likes: 382,
+				dislikes: 77,
+				image: challenge2_idea2,
+				date: getRandomIdeaDate(),
+				commentsCount: 0,
+				comments: [],
+			},
 		],
-		images: [idea2_1, idea2_2, idea2_3],
-	},
-	{
-		id: "strinder",
-		user: "Anna Miller",
-		sharingValue: "world",
-		isPublished: true,
-		isAnonymous: false,
-		deadline: getRandomDeadline(),
-		publishedDate: getRandomPublishedDate(),
-		avatar: profile_anna_miller,
-		title: "Strinder",
-		likes: 753,
-		dislikes: 73,
-		comments: 25,
-		commentItems: [],
-		text: `Imagine an app, I call it Strinder, where you can add your partner and/or friends. Before a movie night, on the way back home you can swipe Netflix or prime Shows like on tinder. Your partner does the same and later you can directly start to watch the show, instead of wasting time, deciding what you are watching. Streaming & Tinder – Strinder.`,
-		tags: [
-			"timesafer",
-			"streaming",
-			"shows",
-			"netflix",
-			"prime",
-			"youtube",
-			"couples",
-			"friends",
-		],
-		images: [idea3_1, idea3_2, idea3_3],
-	},
-	{
-		id: "vr-movies-and-concerts",
-		user: "Max Smith",
-		sharingValue: "world",
-		isPublished: true,
-		isAnonymous: false,
-		deadline: getRandomDeadline(),
-		publishedDate: getRandomPublishedDate(),
-		avatar: profile_max_smith,
-		title: "VR Movies &amp; Concerts",
-		likes: 631,
-		dislikes: 99,
-		comments: 36,
-		commentItems: [],
-		text: `That's the next big thing in entertainment. Image your favourite movie and you are in the middle of it. Not like the 3D movies in the cinema. Sure, these movies are cool, but imagine beeing a part of it. Either with VR-Goggles or with your smartphone. The Screens go up to 120hz, so the technology is already here. First movie could/should be a fully animated movie, but how cool would it be, beeing in a movie with real actors and surroudings with VR Googles. 
-
-				Everyone can experience a movie, as he/she would be alone in the world (imagine Jurassic Park!!). In addition: With the right headphones/buds the music/concert industry could drastically scale their customers/attendees all over the world.`,
-		tags: [
-			"filmingindustry",
-			"experience",
-			"concerts",
-			"movies",
-			"innovation",
-			"cinema@home",
-			"disruptive",
-			"homecinema",
-		],
-		images: [idea4_1, idea4_2, idea4_3],
-	},
-	{
-		id: "atms-with-face-recognition",
-		user: "Isabella Moore",
-		sharingValue: "world",
-		isPublished: true,
-		isAnonymous: false,
-		deadline: getRandomDeadline(),
-		publishedDate: getRandomPublishedDate(),
-		avatar: profile_isabella_moore,
-		title: "ATMs with face recognition",
-		likes: 544,
-		dislikes: 92,
-		comments: 77,
-		commentItems: [],
-		text: `I can enter my banking app including my account with my face and I can confirm my transactions with my thumb. Why can't I, if I want it, do the same at the ATM (maybe in my homecountry)? It saves plastic, postal services and i cannot forget it.`,
-		tags: [
-			"futurebanking",
-			"paymenttransactions",
-			"realcash",
-			"cash",
-			"euro",
-			"convenient",
-		],
-		images: [idea5_1, idea5_2, idea5_3],
-	},
-	{
-		id: "housedoor-doorbell-with-face-recognition",
-		user: "Kent Clark",
-		sharingValue: "world",
-		isPublished: true,
-		isAnonymous: false,
-		deadline: getRandomDeadline(),
-		publishedDate: getRandomPublishedDate(),
-		avatar: profile_kent_clark,
-		title: "Housedoor / Dorrbell with face recognition",
-		likes: 669,
-		dislikes: 198,
-		comments: 59,
-		commentItems: [],
-		text: `Most smarthouses or housedoors are having cameras and the houseowner still needs a key, keycard or the smartphone. Something that can be lost. If the doorbell has a 3D camera (like modern smartphones), the houseowner's face could be recognized with a smile and there is no key necessary. With this technology the securitymeasuses should be also very high.`,
-		tags: [
-			"smarthome",
-			"keyless",
-			"facerecognition",
-			"biometrics",
-			"techtrends",
-			"innovation",
-		],
-		images: [idea6_1, idea6_2, idea6_3],
-	},
-	{
-		id: "beeswax-as-wrapping",
-		user: "Olivia Lopez",
-		sharingValue: "world",
-		isPublished: true,
-		isAnonymous: false,
-		deadline: getRandomDeadline(),
-		publishedDate: getRandomPublishedDate(),
-		avatar: profile_olivia_lopez,
-		title: "Beeswax as wrapping",
-		likes: 669,
-		dislikes: 198,
-		comments: 59,
-		commentItems: [],
-		text: `Instead of plastic, companies could use beeswax as wrapping for products. It could be used at home or in the supermarket for food, which is normally packed in plastic.`,
-		tags: ["sustainability", "wrapping", "beeswax", "noplastic"],
-		images: [idea7_1, idea7_2, idea7_3],
-	},
-	{
-		id: "emergency-tracker-for-remote-areas",
-		user: "Sophia Williams",
-		sharingValue: "world",
-		isPublished: true,
-		isAnonymous: false,
-		deadline: getRandomDeadline(),
-		publishedDate: getRandomPublishedDate(),
-		avatar: profile_sophia_williams,
-		title: "Emergency tracker for remote areas",
-		likes: 421,
-		dislikes: 133,
-		comments: 68,
-		commentItems: [],
-		text: `In a case of emergency in the mountains, it takes most of the time several hours or even days to find the missing person. Most of the time this is the case because there ist no connection (or power) to the smartphone.
-
-				Imagine a small cube which you turn on at the beginning of your walking trip and it sends a strong personalized signal every 1 to 5 minutes. If you didn´t arrive at your destination, the rescue team would receive the signal for example with a helicopter or a drone from the air. It should have enough power for several days.`,
-		tags: [
-			"lifesafer",
-			"savemountains",
-			"hiking",
-			"walking",
-			"remoteareas",
-			"alps",
-		],
-		images: [idea8_1, idea8_2, idea8_3],
+		text: `Hi there. Every year people hurt themselfs on hiking tracks and the rescue chain will start several hours later, because people will be missed only an night (tourists, when the booked room ist empty). `,
+		tags: ["hiking", "safety", "rescuechain", "selfhurting"],
+		images: [challenge2_image],
 	},
 
 	{
-		id: "think-tank",
+		id: "focus-on-creative-thinking",
 		user: "Mia Johnson",
 		sharingValue: "company",
 		isPublished: true,
@@ -331,43 +240,43 @@ export const STORE: StoreItem[] = [
 		deadline: getRandomDeadline(),
 		publishedDate: getRandomPublishedDate(),
 		avatar: profile_mia_johnson,
-		title: "Think Tank",
+		title: "Focus on creative thinking",
+		views: 95,
 		likes: 239,
 		dislikes: 95,
-		comments: 32,
-		commentItems: [],
-		text: `Hello team, I do have an idea for all of us. Our teamwork is great and i think I can speak for all of us, that we enjoy working together. But sometimes it is difficult to work concetrated and work in quite, or even having a private phone call. And going half way to the other side oft he building for an empty meeting room is difficult. 
-
-					How about we install a small Think tank near our wardrobe – this corner is not used and this installation makes us even more efficient. Who thinks like me?`,
-		tags: ["workingquiet", "efficient", "private", "thinktanks"],
-		images: [idea11_1, idea11_2, idea11_3],
-	},
-	{
-		id: "implement-a-daily",
-		user: "Manuel Wilson",
-		sharingValue: "company",
-		isPublished: true,
-		isAnonymous: false,
-		deadline: getRandomDeadline(),
-		publishedDate: getRandomPublishedDate(),
-
-		avatar: profile_manuel_wilson,
-		title: "Implement a daily",
-		likes: 93,
-		dislikes: 51,
-		comments: 14,
-		commentItems: [],
-		text: `I just made the first experience with a project made with SCRUM technique. We could also implement one thing for our daily routine.
-
-				How about we implement a daily for about 5 minutes at 8.00 o'clock in the morning and we 4 drink a coffee together. So we know what the others are doing, maybe someone who needs help. So we can make our weekly 1 hour jourefixe into a 3 weeks routine. So we are closer as a team and we save time.`,
-		tags: [
-			"team",
-			"teamwork",
-			"scrum",
-			"daily",
-			"meetingculture",
-			"workatmosphere",
+		ideasCount: 32,
+		reward: 1800,
+		announcementDate: getRandomAnnouncementDate(),
+		ideas: [
+			{
+				id: "idea-1",
+				user: "Kent Clark",
+				avatar: profile_kent_clark,
+				title: "Change work place and go outside",
+				text: `Close Outlook, Slack and Teams, grab your Laptop and some paper, go on the roof terrasse, drink a coffee and see magic happening.`,
+				likes: 229,
+				dislikes: 32,
+				image: challenge3_idea1,
+				date: getRandomIdeaDate(),
+				commentsCount: 0,
+				comments: [],
+			},
+			{
+				id: "idea-2",
+				user: "Sophia Williams",
+				avatar: profile_sophia_williams,
+				title: "Google similar topics",
+				text: `It get creative when i read about the topic, where i need to be creative. Google the topic and read articles, listen to podcasts. That might do the job.`,
+				likes: 198,
+				dislikes: 20,
+				image: challenge3_idea2,
+				date: getRandomIdeaDate(),
+				commentsCount: 0,
+				comments: [],
+			},
 		],
-		images: [idea12_1, idea12_2, idea12_3],
+		text: `How can people be more creative during work? Does anyone have some thoughts about creativity? During daily business it is difficult to find time to be creative.`,
+		tags: ["creativity", "dailybusiness", "workplace", "ideas"],
+		images: [challenge3_image],
 	},
 ];

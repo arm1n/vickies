@@ -37,7 +37,9 @@ export const Edit: FC = () => {
   const [text, setText] = useState("");
   const [images, setImages] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
+  const [reward, setReward] = useState<number>();
   const [deadline, setDeadline] = useState("");
+  const [announcementDate, setAnnouncementDate] = useState("");
   const [isAnonymous, setIsAnoymous] = useState(false);
   const [sharingValue, setSharingValue] = useState<SharingValue>("world");
   const [isPublished, setIsPublished] = useState(false);
@@ -69,9 +71,13 @@ export const Edit: FC = () => {
         text,
         images,
         tags,
+        reward: reward || 0,
         deadline,
+        announcementDate,
         sharingValue,
         isAnonymous,
+
+        ideas: [],
         isPublished: true,
         publishedDate: new Date().toISOString(),
       },
@@ -84,7 +90,9 @@ export const Edit: FC = () => {
     text,
     images,
     tags,
+    reward,
     deadline,
+    announcementDate,
     sharingValue,
     isAnonymous,
   ]);
@@ -93,16 +101,20 @@ export const Edit: FC = () => {
     const isTitleValid = title.length > 0;
     const isTextValid = text.length > 0;
     const isTagsValid = tags.length > 0;
+    const isRewardValid = typeof reward === "number" && reward > 0;
     const isDeadlineValid = deadline.length > 0;
+    const isAnnouncementDateValid = announcementDate.length > 0;
 
     setIsValid(
       !isPublished &&
         isTitleValid &&
         isTextValid &&
         isTagsValid &&
-        isDeadlineValid
+        isRewardValid &&
+        isDeadlineValid &&
+        isAnnouncementDateValid
     );
-  }, [title, text, tags, deadline, isPublished]);
+  }, [title, text, tags, reward, deadline, announcementDate, isPublished]);
 
   useEffect(() => {
     if (storeItem === null) {
@@ -114,7 +126,9 @@ export const Edit: FC = () => {
       text,
       images = [],
       tags = [],
+      reward = undefined,
       deadline = "",
+      announcementDate = "",
       isPublished = false,
       sharingValue = "world",
       isAnonymous = false,
@@ -123,7 +137,9 @@ export const Edit: FC = () => {
     setText(text);
     setImages(images);
     setTags(tags);
+    setReward(reward);
     setDeadline(deadline);
+    setAnnouncementDate(announcementDate);
     setSharingValue(sharingValue);
     setIsAnoymous(isAnonymous);
 
@@ -159,7 +175,7 @@ export const Edit: FC = () => {
           <IonTitle>
             <div className="ion-text-center">
               <Text color="main" size="md" bold={true}>
-                edit your vickie
+                edit your challenge
               </Text>
             </div>
           </IonTitle>
@@ -182,17 +198,23 @@ export const Edit: FC = () => {
             <Tags tags={tags} onChange={setTags} />
             <Deadline deadline={deadline} onChange={setDeadline} />
             <Settings
+              deadline={deadline}
+              reward={reward}
+              announcementDate={announcementDate}
               sharingValue={sharingValue}
               isAnonymous={isAnonymous}
+              onChangeReward={setReward}
+              onChangeAnnouncementDate={setAnnouncementDate}
               onChangeSharingValue={setSharingValue}
               onChangeIsAnonymous={setIsAnoymous}
+
             />
           </Container>
         </Section>
         <IonLoading
           isOpen={showLoading}
           onDidDismiss={handleDidDismiss}
-          message={"Sharing your idea..."}
+          message={"Sharing your challenge..."}
           duration={3000}
         />
         {isPublished && (

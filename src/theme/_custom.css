@@ -4,6 +4,10 @@ ion-icon {
 	font-size: 1.5rem;
 }
 
+ion-icon.reset-stroke-width {
+	--ionicon-stroke-width:  2rem;
+}
+
 ion-avatar {
 	--border-radius: 0.25rem;
 }

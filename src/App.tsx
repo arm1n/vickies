@@ -11,7 +11,7 @@ import {
 import { IonReactHashRouter } from "@ionic/react-router";
 // import { ellipseOutline, squareOutline, triangle } from "ionicons/icons";
 
-import { Start, Home, Search, Add, Edit, Likes, Ideas, Idea } from "pages";
+import { Start, Home, Search, Add, Edit, Likes, Challenges, Challenge } from "pages";
 
 import homeIcon from "icons/home.svg";
 import searchIcon from "icons/search.svg";
@@ -52,8 +52,8 @@ const App: FC = () => {
             <Route path="/likes" component={Likes} exact={true} />
             <Route path="/add" component={Add} exact={true} />
             <Route path="/edit/:id" component={Edit} exact={true} />
-            <Route path="/ideas" component={Ideas} exact={true} />
-            <Route path="/idea/:id" component={Idea} exact={true} />
+            <Route path="/challenges" component={Challenges} exact={true} />
+            <Route path="/challenges/:id" component={Challenge} exact={true} />
             <Route
               path="/start"
               render={() =>
@@ -85,7 +85,7 @@ const App: FC = () => {
             <IonTabButton layout="label-hide" tab="likes" href="/likes">
               <IonIcon icon={likesIcon} />
             </IonTabButton>
-            <IonTabButton layout="label-hide" tab="ideas" href="/ideas">
+            <IonTabButton layout="label-hide" tab="challenges" href="/challenges">
               <IonIcon icon={ideasIcon} />
             </IonTabButton>
           </IonTabBar>

@@ -43,12 +43,14 @@ export const Add: React.FC = () => {
       text,
       images,
       tags: [],
+      reward: 0,
       deadline: "",
       sharingValue: "world" as const,
       isAnonymous: false,
       isPublished: false,
       publishedDate: "",
-      commentItems: [],
+      announcementDate: "",
+      ideas: [],
     };
     setItem<StoreItem>(KEY_ITEM, data);
     setShowLoading(true);
@@ -87,7 +89,7 @@ export const Add: React.FC = () => {
           <IonTitle>
             <div className="ion-text-center">
               <Text color="main" size="md" bold={true}>
-                create new vickie
+                create new challenge
               </Text>
             </div>
           </IonTitle>
@@ -109,7 +111,7 @@ export const Add: React.FC = () => {
         <IonLoading
           isOpen={showLoading}
           onDidDismiss={handleDidDismiss}
-          message={"Saving your idea..."}
+          message={"Saving your challenge..."}
           duration={3000}
         />
       </IonContent>
