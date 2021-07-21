@@ -15,7 +15,10 @@ import { Container, Text } from "components";
 import { KEY_ITEM, StoreItem, Idea, Comment, getItem } from "utils";
 
 import { StreamItem } from "./shared/stream-item";
-import { ActionButtonsChallengeDefault } from "./shared/action-buttons-challenge-default";
+import {
+  ActionButtonsChallengeDefault,
+  VIEW_MODE,
+} from "./shared/action-buttons-challenge-default";
 
 import { ActionButtonsChallengeExtended } from "./challenge/action-buttons-challenge-extended";
 import { ButtonsToolbar } from "./challenge/buttons-toolbar";
@@ -91,8 +94,11 @@ export const Challenge: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <Container>
-          <StreamItem {...storeItem} showText={true} showActions={false} />
-          <ActionButtonsChallengeDefault storeItem={storeItem} />
+          <StreamItem {...storeItem} isSticky={true} showText={true} showActions={false} />
+          <ActionButtonsChallengeDefault
+            storeItem={storeItem}
+            viewMode={VIEW_MODE.DETAIL}
+          />
           <hr />
           <ActionButtonsChallengeExtended storeItem={storeItem} />
           <hr />

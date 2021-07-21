@@ -1,5 +1,4 @@
 .wrapper {
-	display: flex;
 	margin-bottom: 1rem;
 	padding-bottom: 1rem;
 	border-bottom: 1px solid var(--ion-color-dark);
@@ -11,7 +10,28 @@
 	padding-bottom: 0;
 }
 
-.profile {
+.section {
+	display: flex;
+}
+
+.sticky .top {
+	left: 0;
+	right:  0;
+	top: var(--min-height);
+
+	z-index: 99;
+	padding: 1rem;
+	position: fixed;
+	margin:  -1rem 0 0;
+	background-color: white;
+	border-bottom:  1px solid var(--ion-color-light);
+}
+
+.sticky .bottom {
+	padding-top: 4rem;
+}
+
+.aside {
 	flex: 0 1 auto;
 	margin-right: 1rem;
 }
@@ -29,6 +49,10 @@
 .header {
 	display: flex;
 	justify-content: space-between;
+}
+
+.meta {
+	min-width: 0;
 }
 
 .text {
@@ -54,7 +78,7 @@
 	justify-content: center;
 }
 
-.pageritem{
+.pageritem {
 	display: block;
 	width: 0.4rem;
 	height: 0.4rem;
@@ -71,10 +95,8 @@
 }
 
 .slide {
-	
 }
 
 .image {
 	display: block;
 }
-

@@ -22,6 +22,7 @@ import { TimeDifference } from "./time-difference";
 import styles from "./stream-item.module.css";
 
 type StreamItemProps = StoreItem & {
+	isSticky?: boolean;
 	showText?: boolean;
 	showActions?: boolean;
 	customAvatar?: string;
@@ -41,6 +42,7 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 		images = [],
 		isPublished,
 		isAnonymous,
+		isSticky = false,
 		showText = false,
 		showActions = true,
 		customAvatar = null,
@@ -111,137 +113,153 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 	}, []);
 
 	return (
-		<div className={styles.wrapper} onClick={clickHandler}>
-			<div className={styles.profile}>
-				<IonAvatar className={styles.avatar}>
-					<img
-						src={avatarUrl}
-						alt={userName}
-						className={styles.avatarimg}
-					/>
-				</IonAvatar>
-			</div>
-			<div className={styles.content}>
-				<div className={styles.header}>
-					<div className={styles.meta}>
-						<div className={styles.title}>
-							<Title tag="h4" type="special" noMargin={true}>
-								{title}
-							</Title>
-						</div>
-						<div className={styles.subtitle}>
-							<Text size="sm">
-								<span className={styles.postedby}>
-									by {userName}
-								</span>
-								{isPublished && (
-									<span className={styles.postedat}>
-										{" "}
-										<Text
-											size="sm"
-											bold={true}
-											color="main"
-										>
-											- <TimeDifference date={deadline} />
-										</Text>
+		<div className={`${styles.wrapper} ${isSticky ? styles.sticky : ''}`} onClick={clickHandler}>
+			<div className={`${styles.section} ${styles.top}`}>
+				<div className={styles.aside}>
+					<IonAvatar className={styles.avatar}>
+						<img
+							src={avatarUrl}
+							alt={userName}
+							className={styles.avatarimg}
+						/>
+					</IonAvatar>
+				</div>
+				<div className={styles.content}>
+					<div className={styles.header}>
+						<div className={styles.meta}>
+							<div className={styles.title}>
+								<Title tag="h4" type="special" noMargin={true} truncate={true}>
+									{title}
+								</Title>
+							</div>
+							<div className={styles.subtitle}>
+								<Text size="sm">
+									<span className={styles.postedby}>
+										by {userName}
 									</span>
-								)}
-							</Text>
+									{isPublished && (
+										<span className={styles.postedat}>
+											{" "}
+											<Text
+												size="sm"
+												bold={true}
+												color="main"
+											>
+												-{" "}
+												<TimeDifference
+													date={deadline}
+												/>
+											</Text>
+										</span>
+									)}
+								</Text>
+							</div>
+						</div>
+						<div className={styles.trigger}>
+							<IonPopover
+								event={popoverEvent}
+								isOpen={showPopover}
+								cssClass="my-custom-class"
+								onDidDismiss={hidePopoverHandler}
+							>
+								<IonList>
+									<IonListHeader>
+										<IonLabel>Actions</IonLabel>
+									</IonListHeader>
+									{actions.map((action, index) => (
+										<IonItem
+											key={index}
+											lines={
+												index < actions.length - 1
+													? "inset"
+													: "none"
+											}
+											button={true}
+											onClick={dummyHandler}
+										>
+											{action}
+										</IonItem>
+									))}
+								</IonList>
+							</IonPopover>
+							<IonButton
+								color="medium"
+								fill="clear"
+								size="small"
+								onClick={showPopoverHandler}
+							>
+								<IonIcon
+									slot="icon-only"
+									size="small"
+									icon={ellipsisHorizontal}
+								/>
+							</IonButton>
 						</div>
 					</div>
-					<div className={styles.trigger}>
-						<IonPopover
-							event={popoverEvent}
-							isOpen={showPopover}
-							cssClass="my-custom-class"
-							onDidDismiss={hidePopoverHandler}
-						>
-							<IonList>
-								<IonListHeader>
-									<IonLabel>Actions</IonLabel>
-								</IonListHeader>
-								{actions.map((action, index) => (
-									<IonItem
-										key={index}
-										lines={
-											index < actions.length - 1
-												? "inset"
-												: "none"
-										}
-										button={true}
-										onClick={dummyHandler}
-									>
-										{action}
-									</IonItem>
-								))}
-							</IonList>
-						</IonPopover>
-						<IonButton
-							color="medium"
-							fill="clear"
-							size="small"
-							onClick={showPopoverHandler}
-						>
-							<IonIcon
-								slot="icon-only"
-								size="small"
-								icon={ellipsisHorizontal}
-							/>
-						</IonButton>
-					</div>
 				</div>
-				<div className={styles.text}>
-					<Text
-						nl2br={true}
-						expandable={!showText}
-						truncate={showText ? 0 : 125}
-						onToggleMore={toggleMoreHandler}
-					>
-						{text}
-					</Text>
-				</div>
-				{showTags && (
-					<div className={styles.tags}>
-						{tags.map((tag, index) => (
-							<span className={styles.tag} key={index}>
-								<Text color="main">#{tag}</Text>
-							</span>
-						))}
-					</div>
-				)}
+			</div>
 
-				{images.length > 0 && (
-					<div className={styles.images}>
-						{images.length > 1 && (
-							<div
-								ref={setPagerElement}
-								className={styles.pager}
-							/>
-						)}
-						<IonSlides
-							pager={true}
-							options={sliderOptions}
-							className={styles.slider}
+			<div className={`${styles.section} ${styles.bottom}`}>
+				<div className={styles.aside}>
+					<div className={styles.avatar} />
+				</div>
+				<div className={styles.content}>
+					<div className={styles.text}>
+						<Text
+							nl2br={true}
+							expandable={!showText}
+							truncate={showText ? 0 : 125}
+							onToggleMore={toggleMoreHandler}
 						>
-							{images.map((image, index) => (
-								<IonSlide key={index} className={styles.slide}>
-									<img
-										className={styles.image}
-										src={image}
-										alt=""
-									/>
-								</IonSlide>
+							{text}
+						</Text>
+					</div>
+					{showTags && (
+						<div className={styles.tags}>
+							{tags.map((tag, index) => (
+								<span className={styles.tag} key={index}>
+									<Text color="main">#{tag}</Text>
+								</span>
 							))}
-						</IonSlides>
-					</div>
-				)}
+						</div>
+					)}
 
-				{showActions && (
-					<ActionButtonsChallengeDefault
-						storeItem={storeItem}
-						onClickButton={dummyHandler}
-					/>
-				)}
+					{images.length > 0 && (
+						<div className={styles.images}>
+							{images.length > 1 && (
+								<div
+									ref={setPagerElement}
+									className={styles.pager}
+								/>
+							)}
+							<IonSlides
+								pager={true}
+								options={sliderOptions}
+								className={styles.slider}
+							>
+								{images.map((image, index) => (
+									<IonSlide
+										key={index}
+										className={styles.slide}
+									>
+										<img
+											className={styles.image}
+											src={image}
+											alt=""
+										/>
+									</IonSlide>
+								))}
+							</IonSlides>
+						</div>
+					)}
+
+					{showActions && (
+						<ActionButtonsChallengeDefault
+							storeItem={storeItem}
+							onClickButton={dummyHandler}
+						/>
+					)}
+				</div>
 			</div>
 		</div>
 	);

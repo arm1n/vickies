@@ -1,15 +1,15 @@
-import React, { FC, Fragment, useMemo, useState, useCallback } from "react";
+import React, { FC, Fragment, useMemo/*, useState, useCallback*/ } from "react";
 import {
 	IonItem,
 	IonLabel,
-	IonIcon,
-	IonButton,
 	IonAvatar,
-	IonPopover,
-	IonList,
-	IonListHeader,
+	// IonIcon,
+	// IonButton,
+	// IonPopover,
+	// IonList,
+	// IonListHeader,
 } from "@ionic/react";
-import { ellipsisHorizontal } from "ionicons/icons";
+// import { ellipsisHorizontal } from "ionicons/icons";
 
 import { Text } from "components";
 import { Idea, Comment } from "utils";
@@ -58,73 +58,73 @@ type CommentProps = {
 };
 
 const CommentsItem: FC<CommentProps> = ({ idea, comment }) => {
-	const [popoverEvent, setPopoverEvent] = useState<MouseEvent | undefined>(
-		undefined
-	);
-	const showPopover = useMemo(() => !!popoverEvent, [popoverEvent]);
+	// const [popoverEvent, setPopoverEvent] = useState<MouseEvent | undefined>(
+	// 	undefined
+	// );
+	// const showPopover = useMemo(() => !!popoverEvent, [popoverEvent]);
 
-	const showPopoverHandler = useCallback((event) => {
-		event.persist();
-		event.stopPropagation();
-		setPopoverEvent(event.nativeEvent);
-	}, []);
-	const hidePopoverHandler = useCallback((event) => {
-		event.stopPropagation();
-		setPopoverEvent(undefined);
-	}, []);
+	// const showPopoverHandler = useCallback((event) => {
+	// 	event.persist();
+	// 	event.stopPropagation();
+	// 	setPopoverEvent(event.nativeEvent);
+	// }, []);
+	// const hidePopoverHandler = useCallback((event) => {
+	// 	event.stopPropagation();
+	// 	setPopoverEvent(undefined);
+	// }, []);
 
 	return (
-		<IonItem lines="none" className={styles.comment}>
-			<IonAvatar slot="start" className={styles.avatar}>
-				<img src={comment.avatar} alt={comment.user} />
-			</IonAvatar>
-			<IonLabel className={styles.label}>
-				<div>
-					<Text bold={true}>{comment.user}</Text>{" "}
-					<Text size="sm">
-						<TimeDifference
-							date={comment.date}
-							fallback="just now"
-						/>
-					</Text>
-				</div>
-				<div>
-					<Text size="sm">answer to {idea.user}</Text>
-				</div>
-				<div className={`${styles.text} ion-text-wrap`}>
-					{comment.text}
-				</div>
-			</IonLabel>
-			<div slot="end">
-				<IonPopover
-					event={popoverEvent}
-					isOpen={showPopover}
-					cssClass="my-custom-class"
-					onDidDismiss={hidePopoverHandler}
-				>
-					<IonList>
-						<IonListHeader>
-							<IonLabel>Actions</IonLabel>
-						</IonListHeader>
-						<IonItem button={true}>Report comment</IonItem>
-						<IonItem button={true} lines="none">
-							Hide comment
-						</IonItem>
-					</IonList>
-				</IonPopover>
-				<IonButton
-					color="medium"
-					fill="clear"
-					size="small"
-					onClick={showPopoverHandler}
-				>
-					<IonIcon
-						slot="icon-only"
+		<div className={styles.commentWrapper}>
+			<IonItem lines="none" className={styles.comment}>
+				<IonAvatar slot="start" className={styles.avatar}>
+					<img src={comment.avatar} alt={comment.user} />
+				</IonAvatar>
+				<IonLabel className={styles.label}>
+					<div>
+						<Text bold={true}>{comment.user}</Text>{" "}
+						<Text size="sm">
+							<TimeDifference
+								date={comment.date}
+								fallback="just now"
+							/>
+						</Text>
+					</div>
+					<div>
+						<Text size="sm">answer to {idea.user}</Text>
+					</div>
+				</IonLabel>
+				{/*<div slot="end">
+					<IonPopover
+						event={popoverEvent}
+						isOpen={showPopover}
+						cssClass="my-custom-class"
+						onDidDismiss={hidePopoverHandler}
+					>
+						<IonList>
+							<IonListHeader>
+								<IonLabel>Actions</IonLabel>
+							</IonListHeader>
+							<IonItem button={true}>Report comment</IonItem>
+							<IonItem button={true} lines="none">
+								Hide comment
+							</IonItem>
+						</IonList>
+					</IonPopover>
+					<IonButton
+						color="medium"
+						fill="clear"
 						size="small"
-						icon={ellipsisHorizontal}
-					/>
-				</IonButton>
-			</div>
-		</IonItem>
+						onClick={showPopoverHandler}
+					>
+						<IonIcon
+							slot="icon-only"
+							size="small"
+							icon={ellipsisHorizontal}
+						/>
+					</IonButton>
+				</div>*/}
+			</IonItem>
+			<div className={`${styles.text} ion-text-wrap`}>{comment.text}</div>
+		</div>
 	);
 };

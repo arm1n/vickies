@@ -78,3 +78,9 @@
 .main {
 	--text-color: var(--ion-color-main);
 }
+
+.truncate {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
