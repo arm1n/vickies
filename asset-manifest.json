@@ -2,16 +2,16 @@
   "files": {
     "static/js/0.3de7e8f5.chunk.js": "/vickies/static/js/0.3de7e8f5.chunk.js",
     "static/js/0.3de7e8f5.chunk.js.map": "/vickies/static/js/0.3de7e8f5.chunk.js.map",
-    "main.css": "/vickies/static/css/main.7311ca60.chunk.css",
-    "main.js": "/vickies/static/js/main.bb09eb89.chunk.js",
-    "main.js.map": "/vickies/static/js/main.bb09eb89.chunk.js.map",
+    "main.css": "/vickies/static/css/main.48a68413.chunk.css",
+    "main.js": "/vickies/static/js/main.626c4fd7.chunk.js",
+    "main.js.map": "/vickies/static/js/main.626c4fd7.chunk.js.map",
     "polyfills-dom.js": "/vickies/static/js/polyfills-dom.5c5fc677.chunk.js",
     "polyfills-dom.js.map": "/vickies/static/js/polyfills-dom.5c5fc677.chunk.js.map",
     "runtime-main.js": "/vickies/static/js/runtime-main.13769bee.js",
     "runtime-main.js.map": "/vickies/static/js/runtime-main.13769bee.js.map",
     "static/css/4.3614eac3.chunk.css": "/vickies/static/css/4.3614eac3.chunk.css",
-    "static/js/4.92ffa8c7.chunk.js": "/vickies/static/js/4.92ffa8c7.chunk.js",
-    "static/js/4.92ffa8c7.chunk.js.map": "/vickies/static/js/4.92ffa8c7.chunk.js.map",
+    "static/js/4.2af6995d.chunk.js": "/vickies/static/js/4.2af6995d.chunk.js",
+    "static/js/4.2af6995d.chunk.js.map": "/vickies/static/js/4.2af6995d.chunk.js.map",
     "static/js/5.dafd68da.chunk.js": "/vickies/static/js/5.dafd68da.chunk.js",
     "static/js/5.dafd68da.chunk.js.map": "/vickies/static/js/5.dafd68da.chunk.js.map",
     "static/js/6.498a8d4f.chunk.js": "/vickies/static/js/6.498a8d4f.chunk.js",
@@ -121,11 +121,11 @@
     "static/js/58.8ac61ef6.chunk.js": "/vickies/static/js/58.8ac61ef6.chunk.js",
     "static/js/58.8ac61ef6.chunk.js.map": "/vickies/static/js/58.8ac61ef6.chunk.js.map",
     "index.html": "/vickies/index.html",
-    "precache-manifest.744cb63b65e5564da1cd8790d529e339.js": "/vickies/precache-manifest.744cb63b65e5564da1cd8790d529e339.js",
+    "precache-manifest.42fe5c7a401969742717bd433f98be19.js": "/vickies/precache-manifest.42fe5c7a401969742717bd433f98be19.js",
     "service-worker.js": "/vickies/service-worker.js",
     "static/css/4.3614eac3.chunk.css.map": "/vickies/static/css/4.3614eac3.chunk.css.map",
-    "static/css/main.7311ca60.chunk.css.map": "/vickies/static/css/main.7311ca60.chunk.css.map",
-    "static/js/4.92ffa8c7.chunk.js.LICENSE.txt": "/vickies/static/js/4.92ffa8c7.chunk.js.LICENSE.txt",
+    "static/css/main.48a68413.chunk.css.map": "/vickies/static/css/main.48a68413.chunk.css.map",
+    "static/js/4.2af6995d.chunk.js.LICENSE.txt": "/vickies/static/js/4.2af6995d.chunk.js.LICENSE.txt",
     "static/js/52.eff62a1c.chunk.js.LICENSE.txt": "/vickies/static/js/52.eff62a1c.chunk.js.LICENSE.txt",
     "static/js/58.8ac61ef6.chunk.js.LICENSE.txt": "/vickies/static/js/58.8ac61ef6.chunk.js.LICENSE.txt",
     "static/js/polyfills-dom.5c5fc677.chunk.js.LICENSE.txt": "/vickies/static/js/polyfills-dom.5c5fc677.chunk.js.LICENSE.txt",
@@ -170,8 +170,8 @@
   "entrypoints": [
     "static/js/runtime-main.13769bee.js",
     "static/css/4.3614eac3.chunk.css",
-    "static/js/4.92ffa8c7.chunk.js",
-    "static/css/main.7311ca60.chunk.css",
-    "static/js/main.bb09eb89.chunk.js"
+    "static/js/4.2af6995d.chunk.js",
+    "static/css/main.48a68413.chunk.css",
+    "static/js/main.626c4fd7.chunk.js"
   ]
 }
