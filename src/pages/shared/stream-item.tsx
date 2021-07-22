@@ -1,4 +1,11 @@
-import React, { FC, useState, useMemo, useCallback } from "react";
+import React, {
+	FC,
+	useState,
+	useMemo,
+	useEffect,
+	useCallback,
+	useRef,
+} from "react";
 import {
 	IonList,
 	IonItem,
@@ -10,6 +17,7 @@ import {
 	IonSlides,
 	IonSlide,
 	IonPopover,
+	useIonViewDidEnter,
 } from "@ionic/react";
 import { ellipsisHorizontal } from "ionicons/icons";
 
@@ -49,6 +57,9 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 		actions = ["Report", "Hide"],
 		onClick = () => {},
 	} = storeItem;
+
+	const topRef = useRef<HTMLDivElement>(null);
+	const bottomRef = useRef<HTMLDivElement>(null);
 
 	const [showTags, setShowTags] = useState(() => text.length < 125);
 	const [popoverEvent, setPopoverEvent] = useState<MouseEvent | undefined>(
@@ -112,9 +123,35 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 		event.stopPropagation();
 	}, []);
 
+	const adjustBottomSpace = useCallback(() => {
+		const { current: top } = topRef;
+		const { current: bottom } = bottomRef;
+
+		if (top === null || bottom === null) {
+			return;
+		}
+
+		const { clientHeight } = top;
+		bottom.style.paddingTop = `${clientHeight}px`;
+	}, []);
+
+	useIonViewDidEnter(adjustBottomSpace);
+
+	useEffect(() => {
+		window.addEventListener("resize", adjustBottomSpace);
+		return () => window.removeEventListener("resize", adjustBottomSpace);
+	}, [adjustBottomSpace]);
+
 	return (
-		<div className={`${styles.wrapper} ${isSticky ? styles.sticky : ''}`} onClick={clickHandler}>
-			<div className={`${styles.section} ${styles.top}`}>
+		<div
+			className={`${styles.wrapper} ${isSticky ? styles.sticky : ""}`}
+			onClick={clickHandler}
+		>
+			<div
+				id="top"
+				className={`${styles.section} ${styles.top}`}
+				ref={topRef}
+			>
 				<div className={styles.aside}>
 					<IonAvatar className={styles.avatar}>
 						<img
@@ -128,7 +165,12 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 					<div className={styles.header}>
 						<div className={styles.meta}>
 							<div className={styles.title}>
-								<Title tag="h4" type="special" noMargin={true} truncate={true}>
+								<Title
+									tag="h4"
+									type="special"
+									noMargin={true}
+									truncate={true}
+								>
 									{title}
 								</Title>
 							</div>
@@ -199,7 +241,10 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 				</div>
 			</div>
 
-			<div className={`${styles.section} ${styles.bottom}`}>
+			<div
+				className={`${styles.section} ${styles.bottom}`}
+				ref={bottomRef}
+			>
 				<div className={styles.aside}>
 					<div className={styles.avatar} />
 				</div>
