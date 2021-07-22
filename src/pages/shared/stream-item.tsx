@@ -17,7 +17,7 @@ import {
 	IonSlides,
 	IonSlide,
 	IonPopover,
-	useIonViewDidEnter,
+	useIonViewWillEnter,
 } from "@ionic/react";
 import { ellipsisHorizontal } from "ionicons/icons";
 
@@ -124,6 +124,10 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 	}, []);
 
 	const adjustBottomSpace = useCallback(() => {
+		if (!isSticky) {
+			return;
+		}
+
 		const { current: top } = topRef;
 		const { current: bottom } = bottomRef;
 
@@ -133,9 +137,9 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 
 		const { clientHeight } = top;
 		bottom.style.paddingTop = `${clientHeight}px`;
-	}, []);
+	}, [isSticky]);
 
-	useIonViewDidEnter(adjustBottomSpace);
+	useIonViewWillEnter(adjustBottomSpace);
 
 	useEffect(() => {
 		window.addEventListener("resize", adjustBottomSpace);

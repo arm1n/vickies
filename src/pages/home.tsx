@@ -16,7 +16,7 @@ import { Container, Section, Title } from "components";
 import profile_hansjoerg_rogen from "images/profiles/profile-hansjoerg-rogen.jpg";
 import messageIcon from "icons/message.svg";
 
-import { MyChallenges } from "./home/my-challenges";
+// import { MyChallenges } from "./home/my-challenges";
 import { MyStream } from "./home/my-stream";
 
 import styles from "./home.module.css";
@@ -45,11 +45,11 @@ export const Home: FC = () => (
       </IonHeader>
       <IonContent fullscreen>
         <Container>
-          <Section>
+          {/*<Section>
             <div className={styles.mychallenges}>
               <MyChallenges />
             </div>
-          </Section>
+          </Section>*/}
           <Section>
             <MyStream />
           </Section>
