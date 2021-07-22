@@ -36,6 +36,7 @@ type StreamItemProps = StoreItem & {
 	customAvatar?: string;
 	actions?: string[];
 	onClick?: (storeItem: StoreItem) => void;
+	onClickedAction?: (action: string) => void;
 };
 
 export const StreamItem: FC<StreamItemProps> = (storeItem) => {
@@ -56,6 +57,7 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 		customAvatar = null,
 		actions = ["Report", "Hide"],
 		onClick = () => {},
+		onClickedAction = () => {},
 	} = storeItem;
 
 	const topRef = useRef<HTMLDivElement>(null);
@@ -221,7 +223,12 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 													: "none"
 											}
 											button={true}
-											onClick={dummyHandler}
+
+											onClick={(event) => {
+												dummyHandler(event);
+												onClickedAction(action);												
+												setPopoverEvent(undefined);
+											}}
 										>
 											{action}
 										</IonItem>
