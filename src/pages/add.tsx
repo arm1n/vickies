@@ -89,7 +89,7 @@ export const Add: React.FC = () => {
           <IonTitle>
             <div className="ion-text-center">
               <Text color="main" size="md" bold={true}>
-                create new challenge
+                create challenge
               </Text>
             </div>
           </IonTitle>

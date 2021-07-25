@@ -175,7 +175,6 @@ export const StreamItem: FC<StreamItemProps> = (storeItem) => {
 									tag="h4"
 									type="special"
 									noMargin={true}
-									truncate={true}
 								>
 									{title}
 								</Title>

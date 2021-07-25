@@ -175,7 +175,7 @@ export const Edit: FC = () => {
           <IonTitle>
             <div className="ion-text-center">
               <Text color="main" size="md" bold={true}>
-                edit your challenge
+                edit challenge
               </Text>
             </div>
           </IonTitle>
